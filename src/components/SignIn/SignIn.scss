@@ -1,0 +1,70 @@
+.auth-page {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+
+  .signin {
+    flex: 0.4;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+      margin-top: -100px;
+      font-size: 34px;
+      font-weight: 300;
+      line-height: 32px;
+      font-weight: 400;
+      margin-bottom: 0px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      line-height: 22px;
+      font-weight: 300;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 320px;
+
+      .input {
+        width: 100%;
+        margin-bottom: 13px;
+      }
+
+      .button {
+        margin-top: 20px;
+        height: 50px;
+        text-transform: none;
+        font-size: 15px;
+
+        .progress {
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+
+  .image {
+    flex: 0.6;
+    background-color: #0099ff;
+  }
+}
+
+@media (max-width: 500px) {
+  .auth-page {
+    position: unset;
+
+    .image {
+      display: none;
+    }
+  }
+}
