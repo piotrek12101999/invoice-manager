@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import UIContext from './UIContext';
 
 const useUI = () => {
-  const auth = useContext(UIContext);
+  const ui = useContext(UIContext);
 
-  return auth;
+  return ui;
 };
 
 export default useUI;

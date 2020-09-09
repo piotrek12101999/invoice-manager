@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { ThemeProvider as MuiThemeProvider, Container } from '@material-ui/core';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { SnackbarProvider, SnackbarOrigin } from 'notistack';
 import UIContext from '../useUI/UIContext';
@@ -26,7 +26,7 @@ const UIProvider: React.FC = ({ children }) => {
         <StyledThemeProvider theme={{ ...themes[theme], ...themes.global }}>
           <SnackbarProvider anchorOrigin={anchorOrigin}>
             <GlobalStyles theme={{ ...themes[theme], ...themes.global }} />
-            <Container> {children} </Container>
+            {children}
           </SnackbarProvider>
         </StyledThemeProvider>
       </MuiThemeProvider>

@@ -6,13 +6,17 @@ export const themes: Themes = {
     primaryColor: '#0099ff',
     textColor: '#000000de',
     secondaryTextColor: '0000008a',
-    canvasColor: '#ffffff'
+    canvasColor: '#f0f1f6',
+    elementsColor: '#ffffff',
+    navIconsColor: '#b9c0de'
   },
   dark: {
     primaryColor: '#0099ff',
     textColor: '#ffffff',
     secondaryTextColor: '#ffffffb3',
-    canvasColor: '#303030'
+    canvasColor: '#18191a',
+    elementsColor: '#252526',
+    navIconsColor: '#e4e6eb'
   },
   global: {
     fontFamily: 'Roboto'

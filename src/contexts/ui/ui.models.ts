@@ -5,6 +5,8 @@ interface Theme {
   textColor: string;
   secondaryTextColor: string;
   canvasColor: string;
+  elementsColor: string;
+  navIconsColor: string;
 }
 
 interface Global {

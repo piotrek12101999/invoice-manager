@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers';
 import { auth } from '../../index';
 import validationSchema from './validationSchema';
 import { useSnackbar } from 'notistack';
+import useAuth from '../../contexts/auth/useAuth/useAuth';
 
 interface Form {
   email: string;
@@ -15,6 +16,7 @@ interface Form {
 const SignIn: React.FC = () => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const { isDataLoading } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const { errors, register, handleSubmit } = useForm<Form>({
     resolver: yupResolver(validationSchema)
@@ -65,12 +67,12 @@ const SignIn: React.FC = () => {
               )
             }}
           />
-          <Button className="button" variant="contained" color="primary" type="submit" disabled={isLoading}>
-            {isLoading ? <CircularProgress size={20} className="progress" /> : 'Sign in'}
+          <Button className="button" variant="contained" color="primary" type="submit" disabled={isLoading || isDataLoading}>
+            {isLoading || isDataLoading ? <CircularProgress size={20} className="progress" /> : 'Sign in'}
           </Button>
         </form>
       </div>
-      <div className="image" />
+      <div className="img" />
     </div>
   );
 };

@@ -53,9 +53,12 @@
     }
   }
 
-  .image {
+  .img {
     flex: 0.6;
-    background-color: #0099ff;
+    background-image: url('https://static.dribbble.com/users/257123/screenshots/13967127/media/20ea6c404c5787a1dca1180abd01905b.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 }
 
@@ -63,7 +66,11 @@
   .auth-page {
     position: unset;
 
-    .image {
+    .signin {
+      flex: 1;
+    }
+
+    .img {
       display: none;
     }
   }
