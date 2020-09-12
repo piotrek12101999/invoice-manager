@@ -1,38 +1,15 @@
 .styled-nav-drawer {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 130px;
+  height: calc(100vh - 80px);
+  width: 90px;
   align-items: center;
   justify-content: space-between;
-  padding-top: 20px;
-  padding-bottom: 20px;
-
-  .profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .profile-pic {
-      height: 60px;
-      width: 60px;
-      border-radius: 50%;
-      background-image: url('https://scontent-frt3-1.xx.fbcdn.net/v/t1.15752-9/118767396_662238421379467_3830174974103182439_n.jpg?_nc_cat=106&_nc_sid=b96e70&_nc_ohc=DWfAnSLB-H8AX-RMozF&_nc_ht=scontent-frt3-1.xx&oh=c14ab31dab73723d3aa5f8b490753f7b&oe=5F7FAEA4');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-    }
-
-    .name {
-      font-size: 15px;
-      font-weight: 500;
-      margin-bottom: 0;
-    }
-  }
+  padding-bottom: 17.5px;
 
   nav {
-    margin-top: 75px;
     width: 100%;
+    margin-top: 10px;
 
     .item {
       text-align: center;

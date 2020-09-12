@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import Header from './Header/Header';
 import NavDrawer from './NavDrawer/NavDrawer';
-import useUI from '../../contexts/ui/useUI/useUI';
-import { Switch } from '@material-ui/core';
 import useData from '../../contexts/data/useData/useData';
+import Chart from './widgets/Chart/Chart';
+import QuickActions from './widgets/QuickActions/QuickActions';
+import Expenses from './widgets/Expenses/Expenses';
+import Incomes from './widgets/Incomes/Incomes';
 
 const Dashboard: React.FC = () => {
-  const { theme, setTheme } = useUI();
-  const { user } = useData();
-  const [isLightTheme, setLightTheme] = useState(theme === 'light');
-
-  useEffect(() => setLightTheme(theme === 'light'), [theme]);
-
-  const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => setTheme(event.currentTarget.checked ? 'light' : 'dark');
+  const {
+    user: { name, profilePicture }
+  } = useData();
 
   return (
-    <div className="dashboard-container">
-      <NavDrawer name={user.name} profilePicture={user.profilePicture} />
-      <div className="dashboard">
-        <p className="title"> Hello, Piotr </p>
-        <Switch checked={isLightTheme} color="primary" onChange={handleThemeChange} />
-        <div className="item-a" />
-        <div className="item-b" />
-        <div className="item-c" />
-        <div className="item-d" />
-        <div className="item-e" />
+    <div className="container">
+      <Header profilePicture={profilePicture} />
+      <div className="dashboard-elements">
+        <NavDrawer />
+        <div className="dashboard">
+          <p className="title"> Hello, {name} </p>
+          <p className="quick-actions"> Quick actions </p>
+          <Chart />
+          <QuickActions />
+          <Expenses />
+          <Incomes />
+        </div>
       </div>
     </div>
   );

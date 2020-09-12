@@ -3,7 +3,6 @@ import { ThemeType, Themes } from '../ui.models';
 
 export const themes: Themes = {
   light: {
-    primaryColor: '#0099ff',
     textColor: '#000000de',
     secondaryTextColor: '0000008a',
     canvasColor: '#f0f1f6',
@@ -11,7 +10,6 @@ export const themes: Themes = {
     navIconsColor: '#b9c0de'
   },
   dark: {
-    primaryColor: '#0099ff',
     textColor: '#ffffff',
     secondaryTextColor: '#ffffffb3',
     canvasColor: '#18191a',
@@ -19,19 +17,21 @@ export const themes: Themes = {
     navIconsColor: '#e4e6eb'
   },
   global: {
+    primaryColor: '#0099ff',
+    secondaryColor: '#f46f2c',
     fontFamily: 'Roboto'
   }
 };
 
-export const createMaterialTheme = (theme: ThemeType): MUITheme => {
-  const selectedTheme = themes[theme];
-
-  return createMuiTheme({
+export const createMaterialTheme = (theme: ThemeType): MUITheme =>
+  createMuiTheme({
     palette: {
       type: theme,
       primary: {
-        main: selectedTheme.primaryColor
+        main: themes.global.primaryColor
+      },
+      secondary: {
+        main: themes.global.secondaryColor
       }
     }
   });
-};

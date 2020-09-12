@@ -1,7 +1,6 @@
 export type ThemeType = 'light' | 'dark';
 
 interface Theme {
-  primaryColor: string;
   textColor: string;
   secondaryTextColor: string;
   canvasColor: string;
@@ -10,6 +9,8 @@ interface Theme {
 }
 
 interface Global {
+  primaryColor: string;
+  secondaryColor: string;
   fontFamily: string;
 }
 
