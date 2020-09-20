@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import { IconButton } from '@material-ui/core';
 import { DashboardRounded, SupervisorAccountRounded, HistoryRounded, SettingsRounded, ExitToAppRounded } from '@material-ui/icons';
 import useAuth from '../../../contexts/auth/useAuth/useAuth';
@@ -14,17 +15,18 @@ const routes = [
 
 const NavDrawer: React.FC = () => {
   const [selectedRoute, setSelectedRoute] = useState('');
+  const { pathname } = useLocation();
   const { signOut } = useAuth();
 
-  useEffect(() => setSelectedRoute(window.location.pathname), []);
-
-  const handleSelectRoute = (route: string) => () => setSelectedRoute(route);
+  useEffect(() => setSelectedRoute(pathname), [pathname]);
 
   const renderRoutes = () =>
     routes.map(({ icon, name }, index) => (
-      <StyledIconsContainer className="item" onClick={handleSelectRoute(name)} key={index}>
-        <IconButton color={selectedRoute === name ? 'primary' : 'inherit'}>{icon}</IconButton>
-      </StyledIconsContainer>
+      <Link to={name} key={index}>
+        <StyledIconsContainer className="item">
+          <IconButton color={selectedRoute === name ? 'primary' : 'inherit'}>{icon}</IconButton>
+        </StyledIconsContainer>
+      </Link>
     ));
 
   return (

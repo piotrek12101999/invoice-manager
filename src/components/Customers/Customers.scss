@@ -1,0 +1,126 @@
+.customers-top-nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -10px;
+
+  .title {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 500;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+
+    .icons {
+      margin-left: 35px;
+
+      button {
+        margin-right: 10px;
+      }
+    }
+
+    .fab {
+      margin-left: 20px;
+    }
+  }
+}
+
+.customers-table {
+  margin-top: 30px;
+  width: 100%;
+
+  .table-header {
+    color: #9d9d9d;
+    font-size: 13px;
+    font-weight: 500;
+
+    .heading {
+      text-align: start;
+    }
+  }
+
+  .row {
+    transition: all 0.15s ease-in;
+    cursor: pointer;
+
+    td {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      border-bottom-color: #9d9d9d;
+    }
+
+    .name {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+
+      span {
+        margin-left: 10px;
+      }
+    }
+
+    &:hover {
+      transform: translateX(-13px);
+    }
+  }
+}
+
+.customers-grid {
+  margin-top: 30px;
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-rows: repeat(auto-fill, 250px);
+  grid-auto-rows: 250px;
+  grid-gap: 20px;
+
+  .element {
+    padding: 15px;
+    border-radius: 20px;
+    transition: transform 0.15s ease-in;
+    cursor: pointer;
+    overflow: auto;
+
+    .avatar {
+      margin: auto;
+    }
+
+    .name {
+      font-weight: 500;
+      font-size: 18px;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #9d9d9d;
+      font-size: 13px;
+      font-weight: 500;
+
+      .address,
+      .tax-id {
+        display: flex;
+        align-items: center;
+
+        .icon {
+          font-size: 12px;
+          margin-right: 3px;
+        }
+      }
+    }
+
+    &:hover {
+      transform: scale(1.05, 1.05);
+    }
+  }
+}

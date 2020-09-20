@@ -1,0 +1,114 @@
+.customer {
+  position: relative;
+
+  .title {
+    font-weight: 500;
+    font-size: 26px;
+    font-weight: 500;
+  }
+
+  &.new {
+    .title {
+      margin-bottom: 70px;
+    }
+  }
+
+  &.edit {
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 38px;
+
+      button {
+        margin-right: -8px;
+        text-transform: unset;
+        font-size: 15px;
+        color: $error;
+      }
+    }
+
+    .avatar {
+      margin: auto;
+      margin-bottom: 30px;
+    }
+
+    .name {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 300;
+      line-height: 32px;
+      margin-bottom: unset;
+    }
+
+    hr {
+      height: 1px;
+      background-color: #e4e8f0;
+      border: 0;
+      margin: 32px auto 42px;
+    }
+  }
+}
+
+form {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+
+  .input {
+    width: 100%;
+    margin-bottom: 18px;
+  }
+
+  .buttons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+
+    .button {
+      text-transform: none;
+      font-size: 15px;
+      width: 48%;
+
+      .progress {
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.customer-dialog {
+  .content {
+    padding: 35px;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-weight: 500;
+    text-align: center;
+    font-size: 18px;
+
+    div {
+      margin-right: 15px;
+    }
+  }
+
+  .buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      width: 48%;
+      height: 40px;
+    }
+  }
+}

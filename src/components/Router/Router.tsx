@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import useAuth from '../../contexts/auth/useAuth/useAuth';
-import Dashboard from '../Dashboard/Dashboard';
+import Layout from '../Layout/Layout';
 import SignIn from '../SignIn/SignIn';
 
 const Router: React.FC = () => {
@@ -10,7 +10,7 @@ const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" render={() => (isSignedIn ? <Dashboard /> : <SignIn />)} />
+        <Route path="/" render={() => (isSignedIn ? <Layout /> : <SignIn />)} />
       </Switch>
     </BrowserRouter>
   );

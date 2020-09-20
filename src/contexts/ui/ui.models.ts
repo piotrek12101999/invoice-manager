@@ -21,3 +21,18 @@ export interface Themes {
   dark: Theme;
   global: Global;
 }
+
+export type DrawerType = 'customer' | 'edit-customer';
+
+export interface Drawer {
+  open: boolean;
+  type: DrawerType | null;
+  editID: string | null;
+}
+
+export interface InitialState {
+  theme: ThemeType;
+  drawer: Drawer;
+  setTheme: (theme: ThemeType) => void;
+  toggleDrawer: (type?: DrawerType, editID?: string) => void;
+}

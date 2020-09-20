@@ -1,8 +1,13 @@
-export interface User {
+interface FirestoreDocument {
+  id: string;
+}
+
+export interface User extends FirestoreDocument {
   NIP: string;
   PKD: string[];
   REGON: string;
   account: string;
+  balance: number;
   companyName: string;
   email: string;
   name: string;
@@ -11,12 +16,16 @@ export interface User {
   profilePicture: string;
 }
 
-export interface Customer {
-  id: string;
+export interface Customer extends FirestoreDocument {
+  NIP: string;
+  REGON?: string;
   name: string;
+  street: string;
+  city: string;
+  postalCode: string;
+  mailingList: string[];
 }
 
-export interface Invoice {
-  id: string;
+export interface Invoice extends FirestoreDocument {
   test: string;
 }

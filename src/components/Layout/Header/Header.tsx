@@ -28,7 +28,6 @@ const Header: React.FC<Props> = ({ profilePicture }) => {
           variant="outlined"
           placeholder="Search"
           InputProps={{
-            style: { borderRadius: 8 },
             startAdornment: (
               <InputAdornment position="start">
                 <SearchRounded />

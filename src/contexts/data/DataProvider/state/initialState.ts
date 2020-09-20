@@ -2,10 +2,12 @@ import { User } from '../../data.models';
 import { InitialState } from './state.models';
 
 const user: User = {
+  id: '',
   NIP: '',
   PKD: [],
   REGON: '',
   account: '',
+  balance: 0,
   companyName: '',
   email: '',
   name: '',

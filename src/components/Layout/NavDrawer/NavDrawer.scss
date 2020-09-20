@@ -1,4 +1,6 @@
 .styled-nav-drawer {
+  position: fixed;
+  top: 80px;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 80px);
@@ -9,7 +11,7 @@
 
   nav {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 8px;
 
     .item {
       text-align: center;

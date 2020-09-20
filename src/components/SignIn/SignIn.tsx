@@ -41,6 +41,8 @@ const SignIn: React.FC = () => {
         <p className="subtitle">Please enter your credentials to proceed.</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
+            variant="outlined"
+            size="small"
             className="input"
             inputRef={register}
             error={Boolean(errors.email)}
@@ -48,8 +50,11 @@ const SignIn: React.FC = () => {
             label="email"
             name="email"
             type="email"
+            autoComplete="user-email"
           />
           <TextField
+            variant="outlined"
+            size="small"
             className="input"
             inputRef={register}
             error={Boolean(errors.password)}
@@ -57,6 +62,7 @@ const SignIn: React.FC = () => {
             label="password"
             name="password"
             type={isPasswordVisible ? 'text' : 'password'}
+            autoComplete="current-password"
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">

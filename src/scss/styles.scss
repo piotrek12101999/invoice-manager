@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap%22.css');
+@import './variables.scss';
 
 @import '../components/SignIn/SignIn.scss';
+@import '../components/Layout/Layout.scss';
 @import '../components/Dashboard/Dashboard.scss';
-@import '../components/Dashboard/Header/Header.scss';
-@import '../components/Dashboard/NavDrawer/NavDrawer.scss';
+@import '../components/Customers/Customers.scss';
+@import '../components/Layout/Header/Header.scss';
+@import '../components/Layout/NavDrawer/NavDrawer.scss';
+@import '../components/Layout/DetailsDrawer/DetailsDrawer.scss';
+@import '../components/Layout/DetailsDrawer/CustomerMode/CustomerDrawer.scss';

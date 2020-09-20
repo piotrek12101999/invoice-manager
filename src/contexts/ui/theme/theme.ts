@@ -33,5 +33,30 @@ export const createMaterialTheme = (theme: ThemeType): MUITheme =>
       secondary: {
         main: themes.global.secondaryColor
       }
+    },
+    overrides: {
+      MuiDrawer: {
+        paper: {
+          background: themes[theme].elementsColor,
+          borderTopLeftRadius: 20,
+          borderBottomLeftRadius: 20
+        }
+      },
+      MuiDialog: {
+        paper: {
+          background: themes[theme].elementsColor,
+          borderRadius: 20
+        }
+      },
+      MuiButton: {
+        root: {
+          borderRadius: 20
+        }
+      },
+      MuiOutlinedInput: {
+        root: {
+          borderRadius: 12
+        }
+      }
     }
   });
