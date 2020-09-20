@@ -16,18 +16,16 @@ const GridView: React.FC<Props> = ({ customers, handleEdit }) => {
         <StyledElementContainer className="element" key={id} onClick={handleEdit(id)}>
           <Avatar size="medium" text={name} className="avatar" />
           <p className="name"> {name} </p>
-          <div className="info">
-            <p className="address">
-              <PlaceRounded className="icon" />
-              <span>
-                {street}, {postalCode} {city}
-              </span>
-            </p>
-            <p className="tax-id">
-              <DescriptionRounded className="icon" />
-              <span>{NIP}</span>
-            </p>
-          </div>
+          <p className="address">
+            <PlaceRounded className="icon" />
+            <span>
+              {street}, {postalCode} {city}
+            </span>
+          </p>
+          <p className="tax-id">
+            <DescriptionRounded className="icon" />
+            <span>{NIP}</span>
+          </p>
         </StyledElementContainer>
       ))}
     </div>
