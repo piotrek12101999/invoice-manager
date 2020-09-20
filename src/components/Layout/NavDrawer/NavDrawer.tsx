@@ -32,7 +32,6 @@ const NavDrawer: React.FC = () => {
   return (
     <StyledElementContainer className="styled-nav-drawer">
       <div className="upper-section">
-        <div className="test" />
         <nav className="nav">{renderRoutes()}</nav>
       </div>
       <StyledIconsContainer className="logout">

@@ -68,7 +68,7 @@ const Customers: React.FC = () => {
               <AppsRounded />
             </IconButton>
           </StyledIconsContainer>
-          <Fab className="fab" color="primary" size="small" style={{ boxShadow: 'unset' }} onClick={handleDrawerOpen}>
+          <Fab className="fab" color="primary" size="small" onClick={handleDrawerOpen}>
             <AddRounded />
           </Fab>
         </div>
