@@ -9,7 +9,8 @@ import { firestore } from '../../../../..';
 import { useSnackbar } from 'notistack';
 import { firestore as staticFirestore } from 'firebase/app';
 import Avatar from '../../../../shared/Avatar/Avatar';
-import { Button, Dialog } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import Dialog from './Dialog/Dialog';
 
 interface Props {
   id: string;
@@ -28,12 +29,7 @@ const EditCustomer: React.FC<Props> = ({ handleClose, id }) => {
   const { register, handleSubmit, errors, control } = useForm<Form>({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      NIP: selectedCustomer?.NIP,
-      REGON: selectedCustomer?.REGON,
-      name: selectedCustomer?.name,
-      city: selectedCustomer?.city,
-      street: selectedCustomer?.street,
-      postalCode: selectedCustomer?.postalCode,
+      ...selectedCustomer,
       mailingList: selectedCustomer?.mailingList.map((mail) => ({ value: mail }))
     }
   });
@@ -55,22 +51,10 @@ const EditCustomer: React.FC<Props> = ({ handleClose, id }) => {
       });
       enqueueSnackbar('Customer edited', { variant: 'info' });
     } catch (error) {
-      console.log(error);
       enqueueSnackbar('There was a problem', { variant: 'error' });
     } finally {
       setLoading(false);
       handleClose();
-    }
-  };
-
-  const handleDelete = async () => {
-    toggleDialog();
-    handleClose();
-    try {
-      await firestore.doc(`${email}/customers/customers/${id}`).delete();
-      enqueueSnackbar('Customer deleted', { variant: 'info' });
-    } catch (error) {
-      enqueueSnackbar('There was a problem', { variant: 'error' });
     }
   };
 
@@ -95,22 +79,14 @@ const EditCustomer: React.FC<Props> = ({ handleClose, id }) => {
           isLoading={isLoading}
         />
       </div>
-      <Dialog className="customer-dialog" open={isDialogOpen} onClose={toggleDialog}>
-        <div className="content">
-          <p className="title"> Are you sure you want to delete customer? </p>
-          <div className="name">
-            <Avatar size="small" text={`${selectedCustomer?.name}`} /> <span> {selectedCustomer?.name} </span>
-          </div>
-          <div className="buttons">
-            <Button color="primary" onClick={toggleDialog}>
-              Cancel
-            </Button>
-            <Button color="primary" variant="contained" onClick={handleDelete}>
-              Delete
-            </Button>
-          </div>
-        </div>
-      </Dialog>
+      <Dialog
+        name={`${selectedCustomer?.name}`}
+        id={`${selectedCustomer?.id}`}
+        handleClose={handleClose}
+        toggleDialog={toggleDialog}
+        isDialogOpen={isDialogOpen}
+        email={email}
+      />
     </>
   );
 };

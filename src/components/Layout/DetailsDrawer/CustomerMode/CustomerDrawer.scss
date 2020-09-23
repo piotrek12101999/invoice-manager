@@ -9,6 +9,7 @@
 
   &.new {
     .title {
+      margin-top: 0px;
       margin-bottom: 70px;
     }
   }
@@ -20,7 +21,12 @@
       align-items: center;
       margin-bottom: 38px;
 
+      .title {
+        margin-top: 0px;
+      }
+
       button {
+        margin-top: -20px;
         margin-right: -8px;
         text-transform: unset;
         font-size: 15px;
