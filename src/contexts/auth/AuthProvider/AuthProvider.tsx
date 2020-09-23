@@ -21,7 +21,7 @@ const AuthProvider: React.FC = ({ children }) => {
         dispatch({ type: SIGN_OUT });
       }
     });
-  }, [fetchData, enqueueSnackbar]);
+  }, [fetchData]);
 
   const signOut = useCallback(async () => {
     try {

@@ -6,7 +6,7 @@ import { Form } from './customerTypes';
 
 interface Props {
   handleSubmit: () => void;
-  register: () => void;
+  register: any;
   onCancel: () => void;
   errors: DeepMap<Form, FieldError>;
   fields: Partial<ArrayField<Record<string, any>, 'id'>>[];

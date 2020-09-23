@@ -46,6 +46,7 @@ const EditCustomer: React.FC<Props> = ({ handleClose, id }) => {
   const onSubmit = async (data: Form) => {
     setLoading(true);
     const { mailingList, REGON } = data;
+
     try {
       await firestore.doc(`${email}/customers/customers/${id}`).update({
         ...data,

@@ -6,7 +6,7 @@ interface Props {
   label: string;
   name: string;
   required?: boolean;
-  register: () => void;
+  register: any;
   error?: string;
   isMailingList?: boolean;
   handleApend?: () => void;
@@ -30,7 +30,7 @@ const Input: React.FC<Props> = ({
   <TextField
     className="input"
     size="small"
-    inputRef={register}
+    inputRef={register()}
     variant="outlined"
     label={label}
     name={name}
