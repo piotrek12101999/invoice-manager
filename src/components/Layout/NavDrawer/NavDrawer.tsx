@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { IconButton } from '@material-ui/core';
-import { DashboardRounded, SupervisorAccountRounded, HistoryRounded, SettingsRounded, ExitToAppRounded } from '@material-ui/icons';
+import {
+  DashboardRounded,
+  SupervisorAccountRounded,
+  HistoryRounded,
+  SettingsRounded,
+  ShoppingCartRounded,
+  FileCopyRounded,
+  ExitToAppRounded
+} from '@material-ui/icons';
 import useAuth from '../../../contexts/auth/useAuth/useAuth';
 import StyledIconsContainer from '../../shared/StyledIconsContainer/StyledIconsContainer';
 import StyledElementContainer from '../../shared/StyledElementContainer/StyledElementContainer';
@@ -9,6 +17,8 @@ import StyledElementContainer from '../../shared/StyledElementContainer/StyledEl
 const routes = [
   { icon: <DashboardRounded className="icon" />, name: '/' },
   { icon: <SupervisorAccountRounded className="icon" />, name: '/customers' },
+  { icon: <FileCopyRounded className="icon" />, name: '/invoices' },
+  { icon: <ShoppingCartRounded className="icon" />, name: '/expenses' },
   { icon: <HistoryRounded className="icon" />, name: '/history' },
   { icon: <SettingsRounded className="icon" />, name: '/settings' }
 ];
