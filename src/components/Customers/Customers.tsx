@@ -43,7 +43,6 @@ const Customers: React.FC = () => {
         value={value}
         setValue={setValue}
         handleDrawerOpen={handleDrawerOpen}
-        elements={customers}
         isListViewSupported
         isListView={isListView}
         setListView={handleListViewSelect}

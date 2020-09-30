@@ -4,7 +4,6 @@ import { SearchRounded, AddRounded, ListRounded, AppsRounded } from '@material-u
 import StyledIconsContainer from '../StyledIconsContainer/StyledIconsContainer';
 
 interface Props {
-  elements: any[];
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
   title: string;

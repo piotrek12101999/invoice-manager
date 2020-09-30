@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import ComponentLayout from '../shared/ComponentLayout/ComponentLayout';
-import useUI from '../../contexts/ui/useUI/useUI';
 import useData from '../../contexts/data/useData/useData';
+import Dialog from './Dialog/Dialog';
 
 const Invoices: React.FC = () => {
-  const { toggleDrawer } = useUI();
-  const { customers } = useData();
+  const { invoices } = useData();
+  const [isDialogOpen, setDialogOpen] = useState(false);
   const [value, setValue] = useState('');
 
-  const handleDrawerOpen = () => toggleDrawer();
+  const toggleDialog = () => setDialogOpen((prevValue) => !prevValue);
 
   return (
     <>
-      <ComponentLayout title="Invoices" value={value} setValue={setValue} handleDrawerOpen={handleDrawerOpen} elements={customers} />
+      <ComponentLayout title="Invoices" value={value} setValue={setValue} handleDrawerOpen={toggleDialog} />
+      <Dialog open={isDialogOpen} onClose={toggleDialog} />
     </>
   );
 };
