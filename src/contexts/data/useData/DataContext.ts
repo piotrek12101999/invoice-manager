@@ -1,12 +1,6 @@
 import { createContext } from 'react';
-import state from '../DataProvider/state/initialState';
+import { DataState } from '../data.models';
 
-const initialState = {
-  ...state,
-  fetchData: (email: string) => {},
-  unsubscribeData: () => {}
-};
-
-const DataContext = createContext(initialState);
+const DataContext = createContext({} as DataState);
 
 export default DataContext;

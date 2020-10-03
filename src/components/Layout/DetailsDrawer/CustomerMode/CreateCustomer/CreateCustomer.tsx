@@ -2,10 +2,10 @@ import React from 'react';
 import CustomerForm from '../shared/CustomerForm';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
+import validationSchema from '../../../../shared/customerValidationSchema/customerValidationSchema';
 import { firestore } from '../../../../..';
 import useData from '../../../../../contexts/data/useData/useData';
 import { useSnackbar } from 'notistack';
-import validationSchema from '../shared/validationSchema';
 import { Form } from '../shared/customerTypes';
 
 interface Props {

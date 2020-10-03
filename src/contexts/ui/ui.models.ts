@@ -30,7 +30,7 @@ export interface Drawer {
   editID: string | null;
 }
 
-export interface InitialState {
+export interface UIState {
   theme: ThemeType;
   drawer: Drawer;
   setTheme: (theme: ThemeType) => void;

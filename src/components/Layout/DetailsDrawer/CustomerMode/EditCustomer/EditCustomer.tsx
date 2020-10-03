@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useData from '../../../../../contexts/data/useData/useData';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
-import validationSchema from '../shared/validationSchema';
+import validationSchema from '../../../../shared/customerValidationSchema/customerValidationSchema';
 import { Form } from '../shared/customerTypes';
 import CustomerForm from '../shared/CustomerForm';
 import { firestore } from '../../../../..';

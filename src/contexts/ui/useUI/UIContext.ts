@@ -1,14 +1,6 @@
 import { createContext } from 'react';
-import { ThemeType, DrawerType, InitialState } from '../ui.models';
-import recoverSavedTheme from '../theme/recoverSavedTheme';
+import { UIState } from '../ui.models';
 
-const initialState: InitialState = {
-  theme: recoverSavedTheme(),
-  drawer: { open: false, type: null, editID: null },
-  setTheme: (theme: ThemeType) => {},
-  toggleDrawer: (type?: DrawerType, editID?: string) => {}
-};
-
-const UIContext = createContext(initialState);
+const UIContext = createContext({} as UIState);
 
 export default UIContext;

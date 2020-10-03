@@ -1,11 +1,6 @@
 import { createContext } from 'react';
-import state from '../AuthProvider/state/initialState';
+import { AuthState } from '../auth.models';
 
-const initialState = {
-  ...state,
-  signOut: () => {}
-};
-
-const AuthContext = createContext(initialState);
+const AuthContext = createContext({} as AuthState);
 
 export default AuthContext;

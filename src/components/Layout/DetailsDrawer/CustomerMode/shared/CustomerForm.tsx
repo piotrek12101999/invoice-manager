@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, CircularProgress } from '@material-ui/core';
 import { DeepMap, FieldError, ArrayField } from 'react-hook-form';
-import Input from './Input';
+import Input from '../../../../shared/Input/Input';
 import { Form } from './customerTypes';
 
 interface Props {
@@ -34,13 +34,13 @@ const CustomerForm: React.FC<Props> = ({ handleSubmit, register, onCancel, error
           label="Mail"
           name={`mailingList[${index}].value`}
           register={register}
-          defaultValue={item.value}
+          defaultValue={item?.value}
           error={errors.mailingList && errors.mailingList[index]?.value?.message}
           isMailingList
-          handleApend={appendField}
+          handleAppend={appendField}
           handleRemove={handleRemove(index)}
           isFirstArrayElement={index === 0}
-          required
+          required={index === 0}
         />
       ))}
       <div className="buttons">
