@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { LinearProgress } from '@material-ui/core';
 import Customer from './steps/Customer/Customer';
-import Products from './steps/Products/Products';
+import Test from './steps/Products/Products';
 import { InvoiceForm } from '../../../contexts/data/data.models';
 
 function getStepContent(step: number, setData: React.Dispatch<React.SetStateAction<InvoiceForm>>) {
@@ -9,7 +9,7 @@ function getStepContent(step: number, setData: React.Dispatch<React.SetStateActi
     case 0:
       return <Customer setData={setData} />;
     case 1:
-      return <Products setData={setData} />;
+      return <Test setData={setData} />;
     case 2:
       return 'This is the bit I really care about!';
     default:

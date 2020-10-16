@@ -17,6 +17,7 @@ interface Props {
   error?: string;
   register?: any;
   type?: string;
+  disabled?: boolean;
   isController?: boolean;
   control?: Control<Record<string, any>>;
   defaultValue?: string;
@@ -36,6 +37,7 @@ const Input: React.FC<Props> = ({
   isMailingList,
   isFirstArrayElement,
   register,
+  disabled,
   handleAppend,
   handleRemove,
   value,
@@ -46,6 +48,7 @@ const Input: React.FC<Props> = ({
     variant: 'outlined',
     label,
     required,
+    disabled,
     error: Boolean(error),
     helperText: error ? error : ' ',
     InputProps: {

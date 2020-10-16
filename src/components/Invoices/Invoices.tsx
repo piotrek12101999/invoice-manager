@@ -14,7 +14,7 @@ const Invoices: React.FC = () => {
   return (
     <>
       <ComponentLayout title="Invoices" value={value} setValue={setValue} handleDrawerOpen={toggleDialog} />
-      <MUIDialog className="dialog-invoices" open={isDialogOpen} onClose={toggleDialog}>
+      <MUIDialog className="dialog-invoices" fullWidth open={isDialogOpen} onClose={toggleDialog}>
         <DialogContent />
       </MUIDialog>
     </>
