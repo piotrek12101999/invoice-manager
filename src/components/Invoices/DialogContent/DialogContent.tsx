@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { LinearProgress } from '@material-ui/core';
 import Customer from './steps/Customer/Customer';
-import Test from './steps/Products/Products';
+import Products from './steps/Products/Products';
+import Details from './steps/Details/Details';
 import { InvoiceForm } from '../../../contexts/data/data.models';
 
 function getStepContent(step: number, setData: React.Dispatch<React.SetStateAction<InvoiceForm>>) {
@@ -9,16 +10,16 @@ function getStepContent(step: number, setData: React.Dispatch<React.SetStateActi
     case 0:
       return <Customer setData={setData} />;
     case 1:
-      return <Test setData={setData} />;
+      return <Products setData={setData} />;
     case 2:
-      return 'This is the bit I really care about!';
+      return <Details />;
     default:
       return 'Unknown step';
   }
 }
 
 const DialogContent: React.FC = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
   const [data, setData] = useState<InvoiceForm>({
     number: '',
     saleDate: new Date(),

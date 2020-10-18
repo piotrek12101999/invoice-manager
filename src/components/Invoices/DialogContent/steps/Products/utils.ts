@@ -3,9 +3,9 @@ export function roundNumber(number: number): number {
 }
 
 export function calculateGrossAmount(quantity: string, netPrice: string, VATRate: string): number {
-  return roundNumber(parseFloat(quantity) * (parseFloat(netPrice) * parseFloat(`1.${parseFloat(VATRate) * 10}`)) || 0);
+  return roundNumber(parseFloat(quantity) * (parseFloat(netPrice) * ((100 + parseFloat(VATRate)) / 100)) || 0);
 }
 
 export function calculateNetPrice(quantity: string, grossAmount: string, VATRate: string): number {
-  return roundNumber(parseFloat(grossAmount) / parseFloat(quantity) / parseFloat(`1.${parseFloat(VATRate) * 10}`) || 0);
+  return roundNumber(parseFloat(grossAmount) / parseFloat(quantity) / ((100 + parseFloat(VATRate)) / 100) || 0);
 }

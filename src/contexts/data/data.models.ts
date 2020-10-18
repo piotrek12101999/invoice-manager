@@ -43,10 +43,10 @@ export interface Product {
 }
 
 export interface Details {
-  status: string;
-  partlyPaid: number;
-  paymentDeadling: Date;
-  comments: string;
+  status?: string;
+  partlyPaid?: number;
+  paymentDeadline?: Date;
+  comments?: string;
 }
 
 export interface Invoice extends FirestoreDocument {

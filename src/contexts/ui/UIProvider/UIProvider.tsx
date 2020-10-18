@@ -2,6 +2,8 @@ import React, { useState, useMemo, useCallback } from 'react';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { SnackbarProvider, SnackbarOrigin } from 'notistack';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import UIContext from '../useUI/UIContext';
 import GlobalStyles from '../theme/GlobalStyles';
 import { themes, createMaterialTheme } from '../theme/theme';
@@ -27,14 +29,16 @@ const UIProvider: React.FC = ({ children }) => {
 
   return (
     <UIContext.Provider value={value}>
-      <MuiThemeProvider theme={createMaterialTheme(theme)}>
-        <StyledThemeProvider theme={{ ...themes[theme], ...themes.global }}>
-          <SnackbarProvider anchorOrigin={anchorOrigin}>
-            <GlobalStyles theme={{ ...themes[theme], ...themes.global }} />
-            {children}
-          </SnackbarProvider>
-        </StyledThemeProvider>
-      </MuiThemeProvider>
+      <StyledThemeProvider theme={{ ...themes[theme], ...themes.global }}>
+        <MuiThemeProvider theme={createMaterialTheme(theme)}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <SnackbarProvider anchorOrigin={anchorOrigin}>
+              <GlobalStyles theme={{ ...themes[theme], ...themes.global }} />
+              {children}
+            </SnackbarProvider>
+          </MuiPickersUtilsProvider>
+        </MuiThemeProvider>
+      </StyledThemeProvider>
     </UIContext.Provider>
   );
 };
