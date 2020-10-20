@@ -7,6 +7,7 @@ import { Form as CustomerForm } from '../../../../Layout/DetailsDrawer/CustomerM
 import { Control, FieldError, DeepMap } from 'react-hook-form';
 
 interface Props {
+  handleBackStep: () => void;
   customers: Customer[];
   fields: any[];
   remove: (index?: number | number[] | undefined) => void;
@@ -19,7 +20,19 @@ interface Props {
   setSelectedCustomer: React.Dispatch<React.SetStateAction<Customer | null>>;
 }
 
-const Form: React.FC<Props> = ({ customers, remove, append, control, register, setSelectedCustomer, onSubmit, reset, fields, errors }) => {
+const Form: React.FC<Props> = ({
+  customers,
+  remove,
+  append,
+  control,
+  register,
+  setSelectedCustomer,
+  onSubmit,
+  reset,
+  fields,
+  errors,
+  handleBackStep
+}) => {
   const handleRemove = (index: number) => () => remove(index);
 
   const handleAppend = () => append({ value: '' });
@@ -33,6 +46,7 @@ const Form: React.FC<Props> = ({ customers, remove, append, control, register, s
       reset({
         name: '',
         NIP: '',
+        REGON: '',
         street: '',
         postalCode: '',
         city: '',
@@ -59,7 +73,7 @@ const Form: React.FC<Props> = ({ customers, remove, append, control, register, s
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form className="customer-form" onSubmit={onSubmit}>
       <Autocomplete
         freeSolo
         options={customers}
@@ -78,6 +92,7 @@ const Form: React.FC<Props> = ({ customers, remove, append, control, register, s
         )}
       />
       <Input control={control} isController error={errors.NIP?.message} name="NIP" label="NIP" required />
+      <Input control={control} isController error={errors.REGON?.message} name="REGON" label="REGON" />
       <Input control={control} isController error={errors.street?.message} name="street" label="Street" required />
       <Input control={control} isController error={errors.postalCode?.message} name="postalCode" label="Postal Code" required />
       <Input control={control} isController error={errors.city?.message} name="city" label="City" required />
@@ -113,9 +128,14 @@ const Form: React.FC<Props> = ({ customers, remove, append, control, register, s
           />
         )
       )}
-      <Button color="primary" variant="contained" type="submit">
-        Next
-      </Button>
+      <div className="buttons">
+        <Button color="primary" type="button" onClick={handleBackStep}>
+          Back
+        </Button>
+        <Button color="primary" variant="contained" type="submit">
+          Next
+        </Button>
+      </div>
     </form>
   );
 };

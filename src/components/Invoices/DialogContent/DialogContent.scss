@@ -1,0 +1,32 @@
+.dialog-invoices {
+  .progress {
+    height: 7.5px;
+  }
+
+  .content {
+    .title {
+      margin-bottom: 20px;
+    }
+
+    .basic-data {
+      .button {
+        margin-top: 20px;
+        text-transform: unset;
+
+        svg {
+          margin-left: 7.5px;
+        }
+      }
+    }
+
+    .customer-form {
+      .buttons {
+        margin-top: 15px;
+
+        button {
+          width: 48%;
+        }
+      }
+    }
+  }
+}
