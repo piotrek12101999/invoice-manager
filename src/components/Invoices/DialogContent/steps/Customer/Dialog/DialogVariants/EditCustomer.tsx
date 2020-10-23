@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSnackbar } from 'notistack';
 import { firestore as staticFirestore } from 'firebase/app';
-import { firestore } from '../../../../../..';
-import useData from '../../../../../../contexts/data/useData/useData';
+import { firestore } from '../../../../../../..';
+import useData from '../../../../../../../contexts/data/useData/useData';
 import Layout from './Layout';
 import { DialogVariantProps } from './dialog-variant.model';
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Dialog as MUIDialog } from '@material-ui/core';
-import { CustomerDialog } from './Customer';
+import { CustomerDialog } from '../Customer';
 import NewCustomer from './DialogVariants/NewCustomer';
 import EditCustomer from './DialogVariants/EditCustomer';
-import { CustomerForm } from '../../useDialogForm';
+import { CustomerForm } from '../../../useDialogForm';
 import { Control } from 'react-hook-form';
 
 interface Props {
