@@ -3,8 +3,8 @@ import { Button } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import Input from '../../../../shared/Input/Input';
 import { Customer } from '../../../../../contexts/data/data.models';
-import { Form as CustomerForm } from '../../../../Layout/DetailsDrawer/CustomerMode/shared/customerTypes';
 import { Control, FieldError, DeepMap } from 'react-hook-form';
+import { CustomerForm } from '../../useDialogForm';
 
 interface Props {
   handleBackStep: () => void;
@@ -13,7 +13,7 @@ interface Props {
   remove: (index?: number | number[] | undefined) => void;
   append: (value: Partial<Record<string, any>> | Partial<Record<string, any>>[], shouldFocus?: boolean | undefined) => void;
   reset: (values: any) => void;
-  onSubmit: (e?: any) => Promise<void>;
+  handleNextStep: () => void;
   control: Control<CustomerForm>;
   register: any;
   errors: DeepMap<CustomerForm, FieldError>;
@@ -27,7 +27,7 @@ const Form: React.FC<Props> = ({
   control,
   register,
   setSelectedCustomer,
-  onSubmit,
+  handleNextStep,
   reset,
   fields,
   errors,
@@ -73,7 +73,7 @@ const Form: React.FC<Props> = ({
   };
 
   return (
-    <form className="customer-form" onSubmit={onSubmit}>
+    <form className="customer-form" onSubmit={handleNextStep}>
       <Autocomplete
         freeSolo
         options={customers}
@@ -132,7 +132,7 @@ const Form: React.FC<Props> = ({
         <Button color="primary" type="button" onClick={handleBackStep}>
           Back
         </Button>
-        <Button color="primary" variant="contained" type="submit">
+        <Button color="primary" variant="contained" type="submit" disabled={Object.keys(errors).length > 0}>
           Next
         </Button>
       </div>

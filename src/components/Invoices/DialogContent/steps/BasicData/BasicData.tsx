@@ -1,50 +1,19 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { Button } from '@material-ui/core';
 import { ArrowRightAltRounded } from '@material-ui/icons';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers';
-import { Invoice, InvoiceForm } from '../../../../../contexts/data/data.models';
-import useData from '../../../../../contexts/data/useData/useData';
+import { Controller } from 'react-hook-form';
 import DatePicker from '../../../../shared/DatePicker/DatePicker';
 import Input from '../../../../shared/Input/Input';
-import validationSchema from './validationSchema';
+import { StepComponent } from '../step-component.model';
+import { BasicDataForm } from '../../useDialogForm';
 
-function calculateInvoiceNumber(invoices: Invoice[]): string {
-  const date = new Date();
-  const currentMonth = date.getMonth() + 1;
-  const newInvoiceNumber = invoices.filter(({ saleDate }) => saleDate.getMonth() + 1 === currentMonth).length + 1;
-  return `${newInvoiceNumber}/${currentMonth}/${date.getFullYear()}`;
-}
+const BasicData: React.FC<StepComponent<BasicDataForm>> = ({ setStep, form }) => {
+  const { register, control, getValues, errors, handleSubmit } = form;
 
-interface Form {
-  number: string;
-  saleDate: Date;
-  issueDate: Date;
-}
-
-interface Props {
-  setData: Dispatch<SetStateAction<InvoiceForm>>;
-  setStep: Dispatch<SetStateAction<number>>;
-}
-
-const BasicData: React.FC<Props> = ({ setData, setStep }) => {
-  const { invoices } = useData();
-  const { register, control, handleSubmit, getValues, errors } = useForm<Form>({
-    defaultValues: {
-      number: calculateInvoiceNumber(invoices),
-      saleDate: new Date(),
-      issueDate: new Date()
-    },
-    resolver: yupResolver(validationSchema)
-  });
-
-  const onSubmit = (data: Form) => {
-    setData((prevData) => ({ ...prevData, ...data }));
-    setStep((prevStep) => ++prevStep);
-  };
+  const handleNextStep = () => setStep((prevStep) => ++prevStep);
 
   return (
-    <form className="basic-data" onSubmit={handleSubmit(onSubmit)}>
+    <form className="basic-data" onSubmit={handleSubmit(handleNextStep)}>
       <Input name="number" register={register} label="Invoice number" error={errors.number?.message} required />
       <Controller
         // Date picker requires onChange method which in this case is handled by react-hook-form Controller
@@ -61,13 +30,7 @@ const BasicData: React.FC<Props> = ({ setData, setStep }) => {
         name="issueDate"
         label="Issue date"
       />
-      <Button
-        className="button"
-        type="submit"
-        color="primary"
-        variant="contained"
-        disabled={Boolean(errors.number || errors.issueDate || errors.saleDate)}
-      >
+      <Button className="button" color="primary" variant="contained" type="submit" disabled={Object.keys(errors).length > 0}>
         Proceed to next step <ArrowRightAltRounded />
       </Button>
     </form>

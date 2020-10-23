@@ -30,3 +30,33 @@
     }
   }
 }
+
+.add-invoice-customer-dialog {
+  width: 364px;
+  padding: 16px;
+
+  .title {
+    text-align: center;
+  }
+
+  .data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .name {
+      font-weight: 500;
+      margin-left: 25px;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+
+    button {
+      width: 48%;
+    }
+  }
+}

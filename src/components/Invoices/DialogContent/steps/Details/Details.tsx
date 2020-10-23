@@ -16,7 +16,7 @@ const Details: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Switch name="isStatus" color="primary" inputRef={register()} />
-      <Input name="status" label="status" register={register} />
+      <Input name="status" label="status" register={register} disabled />
       <div>
         Partly paid
         <Checkbox color="primary" name="partlyPaid" inputRef={register()} />
@@ -30,7 +30,7 @@ const Details: React.FC = () => {
       />
       <Switch name="areComments" color="primary" inputRef={register()} />
       <Input name="comments" label="comments" register={register} />
-      <Button color="primary" variant="contained">
+      <Button color="primary" variant="contained" type="submit">
         submit
       </Button>
     </form>
