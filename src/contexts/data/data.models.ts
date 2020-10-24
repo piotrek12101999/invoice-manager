@@ -59,16 +59,6 @@ export interface Invoice extends FirestoreDocument {
   details: Details;
 }
 
-export interface InvoiceForm {
-  number: string;
-  saleDate: Date;
-  issueDate: Date;
-  totalPrice: number;
-  customer: InvoiceCustomer | null;
-  products: Product[];
-  details: Details | null;
-}
-
 export interface DataState extends InitialState {
   fetchData: (email: string) => void;
   unsubscribeData: () => void;

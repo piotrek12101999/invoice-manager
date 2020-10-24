@@ -4,7 +4,7 @@ import BasicData from './steps/BasicData/BasicData';
 import Customer from './steps/Customer/Customer';
 import Products from './steps/Products/Products';
 import Details from './steps/Details/Details';
-import { InvoiceForm } from '../../../contexts/data/data.models';
+import Summary from './steps/Summary/Summary';
 import useDialogForm, { useDialogFormType } from './useDialogForm';
 
 function getStepContent(step: number, setStep: Dispatch<SetStateAction<number>>, forms: useDialogFormType) {
@@ -27,7 +27,12 @@ function getStepContent(step: number, setStep: Dispatch<SetStateAction<number>>,
     case 3:
       return {
         title: '4. Fill details',
-        content: <Details />
+        content: <Details setStep={setStep} form={forms.detailsForm} />
+      };
+    case 4:
+      return {
+        title: '5. Summary',
+        content: <Summary setStep={setStep} forms={forms} />
       };
     default:
       return {
@@ -38,22 +43,14 @@ function getStepContent(step: number, setStep: Dispatch<SetStateAction<number>>,
 }
 
 const DialogContent: React.FC = () => {
-  const [step, setStep] = useState(1);
-  const [data, setData] = useState<InvoiceForm>({
-    number: '',
-    saleDate: new Date(),
-    issueDate: new Date(),
-    totalPrice: 0,
-    customer: null,
-    products: [],
-    details: null
-  });
+  const [step, setStep] = useState(0);
+
   const forms = useDialogForm();
   const { title, content } = getStepContent(step, setStep, forms);
 
   return (
     <>
-      <LinearProgress className="progress" variant="determinate" value={(step + 1) * 25} />
+      <LinearProgress className="progress" variant="determinate" value={(step + 1) * 20} />
       <div className="content">
         <p className="title"> {title} </p>
         {content}

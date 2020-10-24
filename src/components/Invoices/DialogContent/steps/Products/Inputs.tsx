@@ -74,7 +74,17 @@ export const QuantityInput: React.FC<Props> = ({ control, register, defaultValue
     }
   }
 
-  return <Input register={register} label="Quantity" type="number" name={`products[${index}].quantity`} defaultValue={defaultValue} />;
+  return (
+    <Input
+      register={register}
+      type="number"
+      fullWidth
+      label="Quantity"
+      name={`products[${index}].quantity`}
+      defaultValue={defaultValue}
+      required
+    />
+  );
 };
 
 export const NetPriceInput: React.FC<Props> = ({ control, register, defaultValue, index }) => {
@@ -95,7 +105,18 @@ export const NetPriceInput: React.FC<Props> = ({ control, register, defaultValue
     }
   }
 
-  return <Input register={register} label="Net price" name={`products[${index}].netPrice`} defaultValue={defaultValue} />;
+  return (
+    <Input
+      register={register}
+      type="number"
+      step={0.01}
+      fullWidth
+      label="Net price"
+      name={`products[${index}].netPrice`}
+      defaultValue={defaultValue}
+      required
+    />
+  );
 };
 
 export const GrossAmoutInput: React.FC<Props> = ({ control, register, defaultValue, index }) => {
@@ -116,5 +137,16 @@ export const GrossAmoutInput: React.FC<Props> = ({ control, register, defaultVal
     }
   }
 
-  return <Input register={register} label="Gross amount" name={`products[${index}].grossAmount`} defaultValue={defaultValue} />;
+  return (
+    <Input
+      register={register}
+      label="Gross amount"
+      type="number"
+      step={0.01}
+      fullWidth
+      name={`products[${index}].grossAmount`}
+      defaultValue={defaultValue}
+      required
+    />
+  );
 };

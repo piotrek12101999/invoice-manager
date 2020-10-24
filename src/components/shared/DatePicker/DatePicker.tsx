@@ -7,9 +7,10 @@ interface Props {
   onChange: (event: MaterialUiPickersDate) => void;
   label?: string;
   required?: boolean;
+  disabled?: boolean;
 }
 
-const DatePicker: React.FC<Props> = ({ value, onChange, label, required }) => (
+const DatePicker: React.FC<Props> = ({ value, onChange, label, required, disabled }) => (
   <KeyboardDatePicker
     value={value}
     onChange={onChange}
@@ -19,6 +20,7 @@ const DatePicker: React.FC<Props> = ({ value, onChange, label, required }) => (
     margin="dense"
     inputVariant="outlined"
     required={required}
+    disabled={disabled}
   />
 );
 

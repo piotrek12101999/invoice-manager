@@ -29,7 +29,7 @@ export interface CustomerForm extends Form {
 
 export interface DetailsForm {
   status: string | undefined;
-  partlyPaid: boolean;
+  partlyPaid: string | undefined;
   paymentDeadline: Date | undefined;
   comments: string | undefined;
 }

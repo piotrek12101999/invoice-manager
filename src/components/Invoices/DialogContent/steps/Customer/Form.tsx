@@ -5,6 +5,7 @@ import Input from '../../../../shared/Input/Input';
 import { Customer } from '../../../../../contexts/data/data.models';
 import { Control, FieldError, DeepMap } from 'react-hook-form';
 import { CustomerForm } from '../../useDialogForm';
+import { ArrowRightAltRounded } from '@material-ui/icons';
 
 interface Props {
   handleBackStep: () => void;
@@ -133,7 +134,7 @@ const Form: React.FC<Props> = ({
           Back
         </Button>
         <Button color="primary" variant="contained" type="submit" disabled={Object.keys(errors).length > 0}>
-          Next
+          Proceed <ArrowRightAltRounded />
         </Button>
       </div>
     </form>

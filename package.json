@@ -40,7 +40,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "count": "cloc src/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -58,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "cloc": "^2.7.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard-react": "^9.2.0",

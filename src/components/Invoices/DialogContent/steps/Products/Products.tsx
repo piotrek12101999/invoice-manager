@@ -4,37 +4,63 @@ import Input from '../../../../shared/Input/Input';
 import { QuantityInput, NetPriceInput, VATRateInput, GrossAmoutInput } from './Inputs';
 import { StepComponent } from '../step-component.model';
 import { ProductsForm } from '../../useDialogForm';
+import { Button } from '@material-ui/core';
+import { ArrowRightAltRounded } from '@material-ui/icons';
 
 const Products: React.FC<StepComponent<ProductsForm>> = ({ setStep, form }) => {
-  const { register, control, handleSubmit } = form;
-  const { fields, append } = useFieldArray({
+  const { register, control, handleSubmit, reset } = form;
+  const { fields, append, remove } = useFieldArray({
     name: 'products',
     control
   });
 
   const handleAppend = () => append({ name: '', quantity: 0, netPrice: 0, VATRate: 23, grossAmount: 0 });
 
-  const handleNextStep = () => setStep((prevValue) => ++prevValue);
+  const handleRemove = (index: number) => () => remove(index);
+
+  const handlePrevStep = () => {
+    // Here we save step for useFieldArray handler
+    reset(control.getValues());
+    setStep((prevValue) => --prevValue);
+  };
+
+  const handleNextStep = (data: ProductsForm) => {
+    // Here we save step for useFieldArray handler
+    reset(data);
+    setStep((prevValue) => ++prevValue);
+  };
 
   return (
-    <form onSubmit={handleSubmit(handleNextStep)}>
+    <form className="products-form" onSubmit={handleSubmit(handleNextStep)}>
       {fields.map(({ id, name, quantity, netPrice, VATRate, grossAmount }, index) => {
         return (
-          <div key={id}>
-            <Input register={register} label="Name" name={`products[${index}].name`} defaultValue={name} />
+          <div className="product-row" key={id}>
+            <Input register={register} label="Name" fullWidth name={`products[${index}].name`} defaultValue={name} required />
             <QuantityInput control={control} defaultValue={quantity} index={index} register={register} />
             <NetPriceInput control={control} defaultValue={netPrice} index={index} register={register} />
             <VATRateInput control={control} defaultValue={VATRate} index={index} />
             <br />
             <br />
             <GrossAmoutInput control={control} defaultValue={grossAmount} index={index} register={register} />
+            {index !== 0 && (
+              <Button className="remove-button" type="button" color="secondary" variant="outlined" onClick={handleRemove(index)}>
+                Remove
+              </Button>
+            )}
           </div>
         );
       })}
-      <button type="button" onClick={handleAppend}>
+      <Button className="append-button" type="button" color="primary" variant="outlined" onClick={handleAppend}>
         Appends
-      </button>
-      <button type="submit"> submit </button>
+      </Button>
+      <div className="buttons">
+        <Button type="button" color="primary" onClick={handlePrevStep}>
+          Back
+        </Button>
+        <Button className="submit-button" type="submit" color="primary" variant="contained">
+          Proceed <ArrowRightAltRounded />
+        </Button>
+      </div>
     </form>
   );
 };

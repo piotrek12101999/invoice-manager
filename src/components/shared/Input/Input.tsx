@@ -22,6 +22,10 @@ interface Props {
   control?: Control<Record<string, any>>;
   defaultValue?: string;
   value?: string;
+  multiline?: boolean;
+  fullWidth?: boolean;
+  step?: number;
+  rows?: number;
 }
 
 const Input: React.FC<Props> = ({
@@ -42,6 +46,10 @@ const Input: React.FC<Props> = ({
   handleRemove,
   value,
   onChange,
+  rows,
+  multiline,
+  fullWidth,
+  step,
   type = 'text'
 }) => {
   const sharedProps = {
@@ -49,6 +57,7 @@ const Input: React.FC<Props> = ({
     label,
     required,
     disabled,
+    fullWidth,
     error: Boolean(error),
     helperText: error ? error : ' ',
     InputProps: {
@@ -68,7 +77,10 @@ const Input: React.FC<Props> = ({
       })
     },
     type,
+    inputProps: { ...(type === 'number' && { step }) },
     ...(isAutoComplete && { ...autoCompleteProps }),
+    rows,
+    multiline,
     size: 'small'
   };
 
