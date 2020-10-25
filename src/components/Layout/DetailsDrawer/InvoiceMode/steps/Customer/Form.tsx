@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import Input from '../../../../shared/Input/Input';
-import { Customer } from '../../../../../contexts/data/data.models';
+import Input from '../../../../../shared/Input/Input';
+import { Customer } from '../../../../../../contexts/data/data.models';
 import { Control, FieldError, DeepMap } from 'react-hook-form';
 import { CustomerForm } from '../../useDialogForm';
 import { ArrowRightAltRounded } from '@material-ui/icons';

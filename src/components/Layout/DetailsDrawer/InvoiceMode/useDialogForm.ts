@@ -1,10 +1,10 @@
 import { useForm, UseFormMethods } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
-import useData from '../../../contexts/data/useData/useData';
+import useData from '../../../../contexts/data/useData/useData';
 import basicDataValidationSchema from './steps/BasicData/validationSchema';
-import customerValidationSchema from '../../shared/customerValidationSchema/customerValidationSchema';
-import { Form } from '../../Layout/DetailsDrawer/CustomerMode/shared/customerTypes';
-import { Invoice, Product } from '../../../contexts/data/data.models';
+import customerValidationSchema from '../../../shared/customerValidationSchema/customerValidationSchema';
+import { Form } from '../CustomerMode/shared/customerTypes';
+import { Invoice, Product } from '../../../../contexts/data/data.models';
 
 export function calculateInvoiceNumber(invoices: Invoice[]): string {
   const date = new Date();

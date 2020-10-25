@@ -2,8 +2,8 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { ArrowRightAltRounded } from '@material-ui/icons';
 import { Controller } from 'react-hook-form';
-import DatePicker from '../../../../shared/DatePicker/DatePicker';
-import Input from '../../../../shared/Input/Input';
+import DatePicker from '../../../../../shared/DatePicker/DatePicker';
+import Input from '../../../../../shared/Input/Input';
 import { StepComponent } from '../step-component.model';
 import { BasicDataForm } from '../../useDialogForm';
 

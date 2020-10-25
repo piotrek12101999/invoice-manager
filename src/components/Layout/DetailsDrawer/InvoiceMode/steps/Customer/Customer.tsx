@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useFieldArray } from 'react-hook-form';
 import isEqual from 'lodash.isequal';
-import { Customer as CustomerData } from '../../../../../contexts/data/data.models';
+import { Customer as CustomerData } from '../../../../../../contexts/data/data.models';
 import Form from './Form';
-import useData from '../../../../../contexts/data/useData/useData';
+import useData from '../../../../../../contexts/data/useData/useData';
 import { StepComponent } from '../step-component.model';
 import { CustomerForm } from '../../useDialogForm';
 import Dialog from './Dialog/Dialog';

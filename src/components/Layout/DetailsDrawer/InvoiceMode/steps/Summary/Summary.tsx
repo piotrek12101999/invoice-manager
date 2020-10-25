@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Accordion, AccordionSummary, AccordionDetails, AccordionActions, Dialog, Button, Chip, CircularProgress } from '@material-ui/core';
 import { ExpandMoreRounded } from '@material-ui/icons';
 import { useDialogFormType } from '../../useDialogForm';
-import useData from '../../../../../contexts/data/useData/useData';
-import { firestore } from '../../../../..';
+import useData from '../../../../../../contexts/data/useData/useData';
+import { firestore } from '../../../../../..';
 import { useSnackbar } from 'notistack';
 
 interface Props {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, CircularProgress } from '@material-ui/core';
-import Avatar from '../../../../../../shared/Avatar/Avatar';
+import Avatar from '../../../../../../../shared/Avatar/Avatar';
 
 interface Props {
   name: string;

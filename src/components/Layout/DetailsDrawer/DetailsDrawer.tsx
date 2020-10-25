@@ -3,7 +3,7 @@ import { Drawer } from '@material-ui/core';
 import useUI from '../../../contexts/ui/useUI/useUI';
 import CreateCustomer from './CustomerMode/CreateCustomer/CreateCustomer';
 import EditCustomer from './CustomerMode/EditCustomer/EditCustomer';
-import CreateInvoice from '../../Invoices/DialogContent/DialogContent';
+import CreateInvoice from './InvoiceMode/InvoiceMode';
 
 const DetailsDrawer: React.FC = () => {
   const {

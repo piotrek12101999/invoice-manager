@@ -1,0 +1,239 @@
+.details-drawer {
+  .content {
+    .steps {
+      text-align: right;
+      margin-bottom: 10px;
+      .step {
+        margin: unset;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 13px;
+        margin-bottom: 5px;
+      }
+
+      .title {
+        margin: unset;
+        font-weight: 500;
+        font-size: 20px;
+      }
+    }
+
+    .progress {
+      margin-bottom: 40px;
+      height: 7.5px;
+      border-radius: 20px;
+    }
+
+    .basic-data {
+      .button {
+        margin-top: 20px;
+        text-transform: unset;
+
+        svg {
+          margin-left: 7.5px;
+        }
+      }
+    }
+
+    .customer-form {
+      .buttons {
+        margin-top: 15px;
+
+        button {
+          text-transform: unset;
+          width: 48%;
+
+          svg {
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+
+    .products-form {
+      button {
+        width: 100%;
+        text-transform: unset;
+      }
+
+      .remove-button {
+        margin-bottom: 20px;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+          width: 48%;
+
+          svg {
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+
+    .content {
+      .title {
+        margin-bottom: 20px;
+      }
+
+      .basic-data {
+        .button {
+          margin-top: 20px;
+          text-transform: unset;
+
+          svg {
+            margin-left: 7.5px;
+          }
+        }
+      }
+
+      .customer-form {
+        .buttons {
+          margin-top: 15px;
+
+          button {
+            text-transform: unset;
+            width: 48%;
+
+            svg {
+              margin-left: 4px;
+            }
+          }
+        }
+      }
+
+      .products-form {
+        button {
+          width: 100%;
+          text-transform: unset;
+        }
+
+        .remove-button {
+          margin-bottom: 20px;
+        }
+
+        .buttons {
+          display: flex;
+          justify-content: space-between;
+
+          button {
+            width: 48%;
+
+            svg {
+              margin-left: 4px;
+            }
+          }
+        }
+      }
+
+      .details-form {
+        .top-margin {
+          margin-top: 15px;
+        }
+
+        button {
+          text-transform: unset;
+        }
+
+        .buttons {
+          margin-top: unset;
+          display: flex;
+          justify-content: space-between;
+
+          button {
+            width: 48%;
+          }
+        }
+      }
+
+      .summary {
+        .content {
+          display: flex;
+          flex-direction: column;
+
+          .mailing-list {
+            margin-top: 16px;
+            margin-bottom: 16px;
+
+            .title {
+              font-size: unset;
+              font-weight: unset;
+              margin-right: 5px;
+            }
+          }
+        }
+
+        .actions {
+          button {
+            text-transform: unset;
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.add-invoice-customer-dialog {
+  width: 364px;
+  padding: 16px;
+
+  .title {
+    text-align: center;
+  }
+
+  .data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .name {
+      font-weight: 500;
+      margin-left: 25px;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+
+    button {
+      width: 48%;
+
+      .progress {
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.dialog-summary-invoice {
+  width: 364px;
+  padding: 16px;
+
+  .title {
+    text-align: center;
+
+    span {
+      font-weight: 500;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+
+    button {
+      width: 48%;
+
+      .progress {
+        margin-top: 5px;
+      }
+    }
+  }
+}

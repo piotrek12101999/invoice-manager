@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFieldArray } from 'react-hook-form';
-import Input from '../../../../shared/Input/Input';
+import Input from '../../../../../shared/Input/Input';
 import { QuantityInput, NetPriceInput, VATRateInput, GrossAmoutInput } from './Inputs';
 import { StepComponent } from '../step-component.model';
 import { ProductsForm } from '../../useDialogForm';

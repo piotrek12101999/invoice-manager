@@ -2,7 +2,7 @@ import React from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { Control, useWatch, Controller } from 'react-hook-form';
 import { calculateGrossAmount, calculateNetPrice } from './utils';
-import Input from '../../../../shared/Input/Input';
+import Input from '../../../../../shared/Input/Input';
 import { ProductsForm } from '../../useDialogForm';
 
 interface VATRateProps {

@@ -11,27 +11,27 @@ function getStepContent(step: number, setStep: Dispatch<SetStateAction<number>>,
   switch (step) {
     case 0:
       return {
-        title: '1. Check invoice data',
+        title: 'New invoice',
         content: <BasicData setStep={setStep} form={forms.basicDataForm} />
       };
     case 1:
       return {
-        title: '2. Select or create customer',
+        title: 'Select or create customer',
         content: <Customer setStep={setStep} form={forms.customerForm} />
       };
     case 2:
       return {
-        title: '3. Add products to sell',
+        title: 'Add products to sell',
         content: <Products setStep={setStep} form={forms.productsForm} />
       };
     case 3:
       return {
-        title: '4. Fill details',
+        title: 'Fill details',
         content: <Details setStep={setStep} form={forms.detailsForm} />
       };
     case 4:
       return {
-        title: '5. Summary',
+        title: 'Summary',
         content: <Summary setStep={setStep} forms={forms} />
       };
     default:
@@ -42,7 +42,7 @@ function getStepContent(step: number, setStep: Dispatch<SetStateAction<number>>,
   }
 }
 
-const DialogContent: React.FC = () => {
+const InvoiceMode: React.FC = () => {
   const [step, setStep] = useState(0);
 
   const forms = useDialogForm();
@@ -50,13 +50,14 @@ const DialogContent: React.FC = () => {
 
   return (
     <>
-      <LinearProgress className="progress" variant="determinate" value={(step + 1) * 20} />
-      <div className="content">
-        <p className="title"> {title} </p>
-        {content}
+      <div className="steps">
+        <p className="step"> Step {step + 1} / 5 </p>
+        <p className="title"> {title}</p>
       </div>
+      <LinearProgress className="progress" variant="determinate" value={(step + 1) * 20} />
+      {content}
     </>
   );
 };
 
-export default DialogContent;
+export default InvoiceMode;
