@@ -5,6 +5,7 @@ import DataContext from '../useData/DataContext';
 import reducer from './state/reducer';
 import initialState from './state/initialState';
 import { FETCH_INVOICES, FETCH_CUSTOMERS, FETCH_USER } from './state/types';
+import { transformFirestoreData } from './transformFirestoreData';
 
 let unsubscribeUser = () => {};
 let unsubscribeCustomers = () => {};
@@ -30,9 +31,8 @@ const AuthProvider: React.FC = ({ children }) => {
       const subscribeCustomers = (email: string) => {
         unsubscribeCustomers = firestore.collection(`${email}/customers/customers`).onSnapshot(
           ({ docs }) => {
-            const payload = docs.map((doc) => ({ id: doc.id, ...doc.data() }));
             // @ts-ignore
-            dispatch({ type: FETCH_CUSTOMERS, payload });
+            dispatch({ type: FETCH_CUSTOMERS, payload: transformFirestoreData(docs) });
           },
           () => enqueueSnackbar('Error while fetching customers', { variant: 'error' })
         );
@@ -41,9 +41,8 @@ const AuthProvider: React.FC = ({ children }) => {
       const subscribeInvoices = (email: string) => {
         unsubscribeInvoices = firestore.collection(`${email}/invoices/invoices`).onSnapshot(
           ({ docs }) => {
-            const payload = docs.map((doc) => ({ id: doc.id, ...doc.data() }));
             // @ts-ignore
-            dispatch({ type: FETCH_INVOICES, payload });
+            dispatch({ type: FETCH_INVOICES, payload: transformFirestoreData(docs) });
           },
           () => enqueueSnackbar('Error while fetching invoices', { variant: 'error' })
         );

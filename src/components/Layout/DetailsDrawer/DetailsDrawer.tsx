@@ -3,6 +3,7 @@ import { Drawer } from '@material-ui/core';
 import useUI from '../../../contexts/ui/useUI/useUI';
 import CreateCustomer from './CustomerMode/CreateCustomer/CreateCustomer';
 import EditCustomer from './CustomerMode/EditCustomer/EditCustomer';
+import CreateInvoice from '../../Invoices/DialogContent/DialogContent';
 
 const DetailsDrawer: React.FC = () => {
   const {
@@ -18,6 +19,8 @@ const DetailsDrawer: React.FC = () => {
         return <CreateCustomer handleClose={handleClose} />;
       case 'edit-customer':
         return <EditCustomer handleClose={handleClose} id={`${editID}`} />;
+      case 'invoice':
+        return <CreateInvoice />;
       default:
         break;
     }

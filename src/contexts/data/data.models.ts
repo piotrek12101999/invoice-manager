@@ -56,7 +56,7 @@ export interface Invoice extends FirestoreDocument {
   totalPrice: number;
   customer: InvoiceCustomer;
   products: Product[];
-  details: Details;
+  details?: Details;
 }
 
 export interface DataState extends InitialState {

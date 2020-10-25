@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, AccordionActions, Dialog, Button, Chip } from '@material-ui/core';
+import { Accordion, AccordionSummary, AccordionDetails, AccordionActions, Dialog, Button, Chip, CircularProgress } from '@material-ui/core';
 import { ExpandMoreRounded } from '@material-ui/icons';
 import { useDialogFormType } from '../../useDialogForm';
+import useData from '../../../../../contexts/data/useData/useData';
+import { firestore } from '../../../../..';
+import { useSnackbar } from 'notistack';
 
 interface Props {
   setStep: React.Dispatch<React.SetStateAction<number>>;
@@ -9,11 +12,16 @@ interface Props {
 }
 
 const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerForm, productsForm, detailsForm } }) => {
+  const {
+    user: { email }
+  } = useData();
+  const { enqueueSnackbar } = useSnackbar();
+  const [isLoading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState<string | false>(false);
   const [open, setOpen] = useState(false);
   const basicData = basicDataForm.getValues();
   const customerData = customerForm.getValues();
-  const productsData = productsForm.getValues();
+  const { products } = productsForm.getValues();
   const detailsData = detailsForm.getValues();
 
   const handleChange = (panel: string) => (_: React.ChangeEvent<{}>, isExpanded: boolean) => {
@@ -22,12 +30,31 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
 
   const handleBack = () => setStep((prevStep) => --prevStep);
 
-  const toggleDialog = () => setOpen((prevValue) => !prevValue);
+  const toggleDialog = () => {
+    if (!isLoading) {
+      setOpen((prevValue) => !prevValue);
+    }
+  };
 
   const handleInvoiceAdd = async () => {
+    setLoading(true);
     try {
+      await firestore.collection(`${email}/invoices/invoices`).add({
+        ...basicData,
+        totalPrice: products.reduce((sum, { grossAmount }) => sum + grossAmount, 0),
+        customer: {
+          ...customerData,
+          mailingList: customerData.mailingList.map(({ value }) => value)
+        },
+        products,
+        details: detailsData
+      });
+      enqueueSnackbar('Invoice added', { variant: 'info' });
     } catch (error) {
+      enqueueSnackbar('There was a problem', { variant: 'error' });
     } finally {
+      setLoading(false);
+      toggleDialog();
     }
   };
 
@@ -55,12 +82,12 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
             <p>
               Address: {customerData.street}, {customerData.city} {customerData.postalCode}
             </p>
-            <p className="mailing-list">
+            <div className="mailing-list">
               <span className="title"> Mailing list: </span>
               {customerData.mailingList.map((mail, index) => (
                 <Chip key={index} label={mail.value} />
               ))}
-            </p>
+            </div>
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={expanded === 'products'} onChange={handleChange('products')}>
@@ -68,7 +95,7 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
             Products data
           </AccordionSummary>
           <AccordionDetails className="content">
-            {productsData.products.map((product, index) => (
+            {products.map((product, index) => (
               <div key={index}>
                 <p> Name: {product.name} </p>
                 <p> Quantity: {product.quantity} </p>
@@ -105,11 +132,11 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
             Are you sure? <span> Invoice can't be upated </span>
           </p>
           <div className="buttons">
-            <Button color="primary" onClick={toggleDialog}>
+            <Button color="primary" onClick={toggleDialog} disabled={isLoading}>
               Cancel
             </Button>
-            <Button color="primary" variant="contained" onClick={handleInvoiceAdd}>
-              Save
+            <Button color="primary" variant="contained" onClick={handleInvoiceAdd} disabled={isLoading}>
+              {isLoading ? <CircularProgress size={20} className="progress" /> : 'Save'}
             </Button>
           </div>
         </div>
