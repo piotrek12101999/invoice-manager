@@ -4,7 +4,7 @@ import useData from '../../../../contexts/data/useData/useData';
 import basicDataValidationSchema from './steps/BasicData/validationSchema';
 import customerValidationSchema from '../../../shared/customerValidationSchema/customerValidationSchema';
 import { Form } from '../CustomerMode/shared/customerTypes';
-import { Invoice, Product } from '../../../../contexts/data/data.models';
+import { Invoice } from '../../../../contexts/data/data.models';
 
 export function calculateInvoiceNumber(invoices: Invoice[]): string {
   const date = new Date();
@@ -19,8 +19,16 @@ export interface BasicDataForm {
   issueDate: Date;
 }
 
+export interface ProductForm {
+  name: string;
+  quantity: string;
+  netPrice: string;
+  VATRate: string;
+  grossAmount: string;
+}
+
 export interface ProductsForm {
-  products: Product[];
+  products: ProductForm[];
 }
 
 export interface CustomerForm extends Form {
@@ -32,6 +40,10 @@ export interface DetailsForm {
   partlyPaid: string | undefined;
   paymentDeadline: Date | undefined;
   comments: string | undefined;
+  isStatus: boolean;
+  isPartlyPaid: boolean;
+  isPaymentDeadline: boolean;
+  areComments: boolean;
 }
 
 export type useDialogFormType = {
@@ -61,13 +73,17 @@ const useDialogForm = (): useDialogFormType => {
   });
   const productsForm = useForm<ProductsForm>({
     defaultValues: {
-      products: [{ name: '', quantity: 0, netPrice: 0, VATRate: 23, grossAmount: 0 }]
+      products: [{ name: '', quantity: '0', netPrice: '0', VATRate: '23', grossAmount: '0' }]
     },
     shouldUnregister: false
   });
   const detailsForm = useForm<DetailsForm>({
     defaultValues: {
-      paymentDeadline: new Date()
+      paymentDeadline: new Date(),
+      isStatus: false,
+      isPartlyPaid: false,
+      isPaymentDeadline: false,
+      areComments: false
     },
     shouldUnregister: false
   });

@@ -17,7 +17,7 @@ const BasicData: React.FC<StepComponent<BasicDataForm>> = ({ setStep, form }) =>
       <Input name="number" register={register} label="Invoice number" error={errors.number?.message} required />
       <Controller
         // Date picker requires onChange method which in this case is handled by react-hook-form Controller
-        as={<DatePicker value={getValues().saleDate} onChange={() => {}} required />}
+        as={<DatePicker value={getValues().saleDate || new Date()} onChange={() => {}} required />}
         control={control}
         name="saleDate"
         label="Sale date"
@@ -25,7 +25,7 @@ const BasicData: React.FC<StepComponent<BasicDataForm>> = ({ setStep, form }) =>
       <br />
       <Controller
         // Date picker requires onChange method which in this case is handled by react-hook-form Controller
-        as={<DatePicker value={getValues().issueDate} onChange={() => {}} required />}
+        as={<DatePicker value={getValues().issueDate || new Date()} onChange={() => {}} required />}
         control={control}
         name="issueDate"
         label="Issue date"

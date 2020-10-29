@@ -14,7 +14,7 @@ const Products: React.FC<StepComponent<ProductsForm>> = ({ setStep, form }) => {
     control
   });
 
-  const handleAppend = () => append({ name: '', quantity: 0, netPrice: 0, VATRate: 23, grossAmount: 0 });
+  const handleAppend = () => append({ name: '', quantity: '0', netPrice: '0', VATRate: '23', grossAmount: '0' });
 
   const handleRemove = (index: number) => () => remove(index);
 

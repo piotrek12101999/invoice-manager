@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, AccordionActions, Dialog, Button, Chip, CircularProgress } from '@material-ui/core';
+import { Accordion, AccordionSummary, AccordionDetails, Dialog, Button, Chip, CircularProgress } from '@material-ui/core';
 import { ExpandMoreRounded } from '@material-ui/icons';
 import { useDialogFormType } from '../../useDialogForm';
 import useData from '../../../../../../contexts/data/useData/useData';
 import { firestore } from '../../../../../..';
 import { useSnackbar } from 'notistack';
+import useUI from '../../../../../../contexts/ui/useUI/useUI';
 
 interface Props {
   setStep: React.Dispatch<React.SetStateAction<number>>;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerForm, productsForm, detailsForm } }) => {
+  const { toggleDrawer } = useUI();
   const {
     user: { email }
   } = useData();
@@ -36,18 +38,41 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
     }
   };
 
+  const addDetailsObject = () => {
+    const { status, isStatus, partlyPaid, isPartlyPaid, paymentDeadline, isPaymentDeadline, comments, areComments } = detailsData;
+
+    if (!isStatus && !isPartlyPaid && !isPaymentDeadline && !areComments) {
+      return {};
+    }
+
+    return {
+      details: {
+        ...(status && isStatus && { status }),
+        ...(partlyPaid && isPartlyPaid && { partlyPaid: parseFloat(partlyPaid) }),
+        ...(comments && areComments && { comments }),
+        ...(paymentDeadline && isPaymentDeadline && { paymentDeadline })
+      }
+    };
+  };
+
   const handleInvoiceAdd = async () => {
     setLoading(true);
     try {
       await firestore.collection(`${email}/invoices/invoices`).add({
         ...basicData,
-        totalPrice: products.reduce((sum, { grossAmount }) => sum + grossAmount, 0),
+        totalPrice: products.reduce((sum, { grossAmount }) => sum + parseFloat(grossAmount), 0),
         customer: {
           ...customerData,
           mailingList: customerData.mailingList.map(({ value }) => value)
         },
-        products,
-        details: detailsData
+        products: products.map(({ name, VATRate, grossAmount, netPrice, quantity }) => ({
+          name,
+          VATRate: parseFloat(VATRate),
+          grossAmount: parseFloat(grossAmount),
+          netPrice: parseFloat(netPrice),
+          quantity: parseFloat(quantity)
+        })),
+        ...addDetailsObject()
       });
       enqueueSnackbar('Invoice added', { variant: 'info' });
     } catch (error) {
@@ -55,6 +80,7 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
     } finally {
       setLoading(false);
       toggleDialog();
+      toggleDrawer();
     }
   };
 
@@ -62,20 +88,20 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
     <>
       <div className="summary">
         <Accordion expanded={expanded === 'basic_data'} onChange={handleChange('basic_data')}>
-          <AccordionSummary expandIcon={<ExpandMoreRounded />} aria-controls="content">
+          <AccordionSummary expandIcon={<ExpandMoreRounded />} aria-controls="summary-content">
             Basic data
           </AccordionSummary>
-          <AccordionDetails className="content">
+          <AccordionDetails className="summary-content">
             <p> Number: {basicData.number} </p>
             <p> Issue date: {basicData.issueDate.toDateString()} </p>
             <p> Sale date: {basicData.saleDate.toDateString()} </p>
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={expanded === 'customer'} onChange={handleChange('customer')}>
-          <AccordionSummary expandIcon={<ExpandMoreRounded />} aria-controls="content">
+          <AccordionSummary expandIcon={<ExpandMoreRounded />} aria-controls="summary-content">
             Customer data
           </AccordionSummary>
-          <AccordionDetails className="content">
+          <AccordionDetails className="summary-content">
             <p> Name: {customerData.name} </p>
             <p> NIP: {customerData.NIP} </p>
             {customerData.REGON && <p> REGON: {customerData.REGON} </p>}
@@ -91,10 +117,10 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={expanded === 'products'} onChange={handleChange('products')}>
-          <AccordionSummary expandIcon={<ExpandMoreRounded />} aria-controls="content">
+          <AccordionSummary expandIcon={<ExpandMoreRounded />} aria-controls="summary-content">
             Products data
           </AccordionSummary>
-          <AccordionDetails className="content">
+          <AccordionDetails className="summary-content">
             {products.map((product, index) => (
               <div key={index}>
                 <p> Name: {product.name} </p>
@@ -106,25 +132,27 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={expanded === 'details'} onChange={handleChange('details')}>
-          <AccordionSummary expandIcon={<ExpandMoreRounded />} aria-controls="content">
+          <AccordionSummary expandIcon={<ExpandMoreRounded />} aria-controls="summary-content">
             Additional details
           </AccordionSummary>
-          <AccordionDetails className="content">
-            {detailsData.status && <p> Status: {detailsData.status} </p>}
-            {detailsData.partlyPaid && <p> Partly paid: {detailsData.partlyPaid} </p>}
-            {detailsData.paymentDeadline && <p> Payment deadline: {detailsData.paymentDeadline.toDateString()} </p>}
-            {detailsData.comments && <p> Comment: {detailsData.comments} </p>}
-            {Object.keys(detailsData).length === 0 && <p> Details haven't been added </p>}
+          <AccordionDetails className="summary-content">
+            {detailsData.isStatus && <p> Status: {detailsData.status} </p>}
+            {detailsData.isPartlyPaid && <p> Partly paid: {detailsData.partlyPaid} </p>}
+            {detailsData.isPaymentDeadline && <p> Payment deadline: {detailsData.paymentDeadline?.toDateString()} </p>}
+            {detailsData.areComments && <p> Comment: {detailsData.comments} </p>}
+            {!detailsData.isStatus && !detailsData.isPartlyPaid && !detailsData.isPaymentDeadline && !detailsData.areComments && (
+              <p> Details haven't been added </p>
+            )}
           </AccordionDetails>
         </Accordion>
-        <AccordionActions className="actions">
+        <div className="buttons">
           <Button color="primary" onClick={handleBack}>
             Back
           </Button>
           <Button color="primary" variant="contained" onClick={toggleDialog}>
             Save
           </Button>
-        </AccordionActions>
+        </div>
       </div>
       <Dialog open={open} onClose={toggleDialog}>
         <div className="dialog-summary-invoice">

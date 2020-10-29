@@ -74,103 +74,51 @@
       }
     }
 
-    .content {
-      .title {
-        margin-bottom: 20px;
+    .details-form {
+      .top-margin {
+        margin-top: 15px;
       }
 
-      .basic-data {
-        .button {
-          margin-top: 20px;
-          text-transform: unset;
-
-          svg {
-            margin-left: 7.5px;
-          }
-        }
+      button {
+        text-transform: unset;
       }
 
-      .customer-form {
-        .buttons {
-          margin-top: 15px;
-
-          button {
-            text-transform: unset;
-            width: 48%;
-
-            svg {
-              margin-left: 4px;
-            }
-          }
-        }
-      }
-
-      .products-form {
-        button {
-          width: 100%;
-          text-transform: unset;
-        }
-
-        .remove-button {
-          margin-bottom: 20px;
-        }
-
-        .buttons {
-          display: flex;
-          justify-content: space-between;
-
-          button {
-            width: 48%;
-
-            svg {
-              margin-left: 4px;
-            }
-          }
-        }
-      }
-
-      .details-form {
-        .top-margin {
-          margin-top: 15px;
-        }
+      .buttons {
+        margin-top: unset;
+        display: flex;
+        justify-content: space-between;
 
         button {
-          text-transform: unset;
+          width: 48%;
         }
+      }
+    }
 
-        .buttons {
-          margin-top: unset;
-          display: flex;
-          justify-content: space-between;
+    .summary {
+      .summary-content {
+        display: flex;
+        flex-direction: column;
 
-          button {
-            width: 48%;
+        .mailing-list {
+          margin-top: 16px;
+          margin-bottom: 16px;
+
+          .title {
+            font-size: unset;
+            font-weight: unset;
+            margin-right: 5px;
           }
         }
       }
 
-      .summary {
-        .content {
-          display: flex;
-          flex-direction: column;
+      .buttons {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
 
-          .mailing-list {
-            margin-top: 16px;
-            margin-bottom: 16px;
-
-            .title {
-              font-size: unset;
-              font-weight: unset;
-              margin-right: 5px;
-            }
-          }
-        }
-
-        .actions {
-          button {
-            text-transform: unset;
-            margin-left: 20px;
-          }
+        button {
+          width: 48%;
+          text-transform: unset;
         }
       }
     }

@@ -15,7 +15,32 @@ interface Props extends VATRateProps {
   register: any;
 }
 
-const VATOptions = [0, 3, 4, 5, 5.5, 6.5, 7, 7.7, 8, 8.5, 9, 9.5, 10, 15, 16, 17, 19, 20, 21, 22, 23, 24, 25, 27];
+const VATOptions = [
+  '0',
+  '3',
+  '4',
+  '5',
+  '5,5',
+  '6,5',
+  '7',
+  '7,7',
+  '8',
+  '8,5',
+  '9',
+  '9,5',
+  '10',
+  '15',
+  '16',
+  '17',
+  '19',
+  '20',
+  '21',
+  '22',
+  '23',
+  '24',
+  '25',
+  '27'
+];
 
 export const VATRateInput: React.FC<VATRateProps> = ({ control, defaultValue, index }) => {
   const value = useWatch({
@@ -30,7 +55,7 @@ export const VATRateInput: React.FC<VATRateProps> = ({ control, defaultValue, in
       const { quantity, netPrice } = values.products[index];
 
       const currentValues = control.getValues().products;
-      currentValues[index].grossAmount = calculateGrossAmount(`${quantity}`, `${netPrice}`, `${value}`);
+      currentValues[index].grossAmount = calculateGrossAmount(quantity, `${netPrice}`, `${value}`);
       control.setValue('products', currentValues);
     }
   }
@@ -69,7 +94,7 @@ export const QuantityInput: React.FC<Props> = ({ control, register, defaultValue
       const { VATRate, netPrice } = values.products[index];
 
       const currentValues = control.getValues().products;
-      currentValues[index].grossAmount = calculateGrossAmount(`${value}`, `${netPrice}`, `${VATRate}`);
+      currentValues[index].grossAmount = calculateGrossAmount(`${value}`, `${netPrice}`, VATRate);
       control.setValue('products', currentValues);
     }
   }
@@ -100,7 +125,7 @@ export const NetPriceInput: React.FC<Props> = ({ control, register, defaultValue
       const { VATRate, quantity } = values.products[index];
 
       const currentValues = control.getValues().products;
-      currentValues[index].grossAmount = calculateGrossAmount(`${quantity}`, `${value}`, `${VATRate}`);
+      currentValues[index].grossAmount = calculateGrossAmount(quantity, `${value}`, VATRate);
       control.setValue('products', currentValues);
     }
   }
@@ -132,7 +157,7 @@ export const GrossAmoutInput: React.FC<Props> = ({ control, register, defaultVal
       const { VATRate, quantity } = values.products[index];
 
       const currentValues = control.getValues().products;
-      currentValues[index].netPrice = calculateNetPrice(`${quantity}`, `${value}`, `${VATRate}`);
+      currentValues[index].netPrice = calculateNetPrice(quantity, `${value}`, VATRate);
       control.setValue('products', currentValues);
     }
   }
