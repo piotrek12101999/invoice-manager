@@ -44,10 +44,10 @@ const CustomerForm: React.FC<Props> = ({ handleSubmit, register, onCancel, error
         />
       ))}
       <div className="buttons">
-        <Button className="button" color="primary" onClick={onCancel} disabled={isLoading}>
+        <Button className="button-customer" color="primary" onClick={onCancel} disabled={isLoading}>
           Cancel
         </Button>
-        <Button className="button" variant="contained" color="primary" type="submit" disabled={isLoading}>
+        <Button className="button-customer" variant="contained" color="primary" type="submit" disabled={isLoading}>
           {isLoading ? <CircularProgress size={20} className="progress" /> : 'Save'}
         </Button>
       </div>

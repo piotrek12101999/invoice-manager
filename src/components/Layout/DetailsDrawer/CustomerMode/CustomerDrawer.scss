@@ -71,13 +71,14 @@ form {
     display: flex;
     justify-content: space-between;
 
-    .button {
+    .button-customer {
       text-transform: none;
       font-size: 15px;
       width: 48%;
 
       .progress {
-        margin-top: 5px;
+        margin-top: 2.5px;
+        margin-bottom: unset;
       }
     }
   }
