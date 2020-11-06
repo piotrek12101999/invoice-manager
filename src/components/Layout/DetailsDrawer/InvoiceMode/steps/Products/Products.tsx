@@ -9,12 +9,17 @@ import { ArrowRightAltRounded } from '@material-ui/icons';
 
 const Products: React.FC<StepComponent<ProductsForm>> = ({ setStep, form }) => {
   const { register, control, handleSubmit, reset } = form;
-  const { fields, append, remove } = useFieldArray({
+  const { fields, remove } = useFieldArray({
     name: 'products',
     control
   });
 
-  const handleAppend = () => append({ name: '', quantity: '0', netPrice: '0', VATRate: '23', grossAmount: '0' });
+  const handleAppend = () => {
+    // Using append method sets other inputs to 0, that's why reset is used here
+    reset({
+      products: [...control.getValues().products, { name: '', quantity: '0', netPrice: '0', VATRate: '23', grossAmount: '0' }]
+    });
+  };
 
   const handleRemove = (index: number) => () => remove(index);
 

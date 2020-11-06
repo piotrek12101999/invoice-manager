@@ -16,6 +16,9 @@ export interface User extends FirestoreDocument {
   phoneNumber: string;
   primaryPKD: string;
   profilePicture: string;
+  street: string;
+  city: string;
+  postalCode: string;
 }
 
 interface CustomerCoreData {
@@ -57,6 +60,7 @@ export interface Invoice extends FirestoreDocument {
   customer: InvoiceCustomer;
   products: Product[];
   details?: Details;
+  isGeneratedPDF: boolean;
 }
 
 export interface DataState extends InitialState {

@@ -13,7 +13,10 @@ const user: User = {
   name: '',
   phoneNumber: '',
   primaryPKD: '',
-  profilePicture: ''
+  profilePicture: '',
+  street: '',
+  postalCode: '',
+  city: ''
 };
 
 const initialState: InitialState = {

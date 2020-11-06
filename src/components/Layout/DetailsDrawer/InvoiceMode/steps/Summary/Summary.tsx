@@ -72,6 +72,7 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
           netPrice: parseFloat(netPrice),
           quantity: parseFloat(quantity)
         })),
+        isGeneratedPDF: false,
         ...addDetailsObject()
       });
       enqueueSnackbar('Invoice added', { variant: 'info' });

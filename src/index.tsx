@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/storage';
 import firebaseConfig from './environment/firebaseConfig';
 import './scss/styles.scss';
 
@@ -12,6 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const storage = firebase.storage().ref();
 
 ReactDOM.render(
   <React.StrictMode>

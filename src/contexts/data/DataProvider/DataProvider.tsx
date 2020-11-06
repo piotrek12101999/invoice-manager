@@ -29,23 +29,29 @@ const AuthProvider: React.FC = ({ children }) => {
       };
 
       const subscribeCustomers = (email: string) => {
-        unsubscribeCustomers = firestore.collection(`${email}/customers/customers`).onSnapshot(
-          ({ docs }) => {
-            // @ts-ignore
-            dispatch({ type: FETCH_CUSTOMERS, payload: transformFirestoreData(docs) });
-          },
-          () => enqueueSnackbar('Error while fetching customers', { variant: 'error' })
-        );
+        unsubscribeCustomers = firestore
+          .collection(`${email}/customers/customers`)
+          .orderBy('name', 'asc')
+          .onSnapshot(
+            ({ docs }) => {
+              // @ts-ignore
+              dispatch({ type: FETCH_CUSTOMERS, payload: transformFirestoreData(docs) });
+            },
+            () => enqueueSnackbar('Error while fetching customers', { variant: 'error' })
+          );
       };
 
       const subscribeInvoices = (email: string) => {
-        unsubscribeInvoices = firestore.collection(`${email}/invoices/invoices`).onSnapshot(
-          ({ docs }) => {
-            // @ts-ignore
-            dispatch({ type: FETCH_INVOICES, payload: transformFirestoreData(docs) });
-          },
-          () => enqueueSnackbar('Error while fetching invoices', { variant: 'error' })
-        );
+        unsubscribeInvoices = firestore
+          .collection(`${email}/invoices/invoices`)
+          .orderBy('saleDate', 'desc')
+          .onSnapshot(
+            ({ docs }) => {
+              // @ts-ignore
+              dispatch({ type: FETCH_INVOICES, payload: transformFirestoreData(docs) });
+            },
+            () => enqueueSnackbar('Error while fetching invoices', { variant: 'error' })
+          );
       };
 
       subscribeUser(email);
