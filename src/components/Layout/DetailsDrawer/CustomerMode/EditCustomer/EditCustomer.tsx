@@ -41,20 +41,20 @@ const EditCustomer: React.FC<Props> = ({ handleClose, id }) => {
 
   const onSubmit = async (data: Form) => {
     setLoading(true);
-    // const { REGON } = data;
-    // try {
-    //   await firestore.doc(`${email}/customers/customers/${id}`).update({
-    //     ...data,
-    //     ...(REGON ? { REGON } : { REGON: staticFirestore.FieldValue.delete() }),
-    //     mailingList: fields.map(({ value }) => value)
-    //   });
-    //   enqueueSnackbar('Customer edited', { variant: 'info' });
-    // } catch (error) {
-    //   enqueueSnackbar('There was a problem', { variant: 'error' });
-    // } finally {
-    //   setLoading(false);
-    //   handleClose();
-    // }
+    const { REGON } = data;
+    try {
+      await firestore.doc(`${email}/customers/customers/${id}`).update({
+        ...data,
+        ...(REGON ? { REGON } : { REGON: staticFirestore.FieldValue.delete() }),
+        mailingList: fields.map(({ value }) => value)
+      });
+      enqueueSnackbar('Customer edited', { variant: 'info' });
+    } catch (error) {
+      enqueueSnackbar('There was a problem', { variant: 'error' });
+    } finally {
+      setLoading(false);
+      handleClose();
+    }
   };
 
   return (
