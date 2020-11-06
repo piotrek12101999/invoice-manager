@@ -3,6 +3,7 @@ import { Button, CircularProgress } from '@material-ui/core';
 import { DeepMap, FieldError, ArrayField } from 'react-hook-form';
 import Input from '../../../../shared/Input/Input';
 import { Form } from './customerTypes';
+import ArrayFieldInput from './ArrayFieldInput';
 
 interface Props {
   handleSubmit: () => void;
@@ -29,17 +30,15 @@ const CustomerForm: React.FC<Props> = ({ handleSubmit, register, onCancel, error
       <Input label="City" name="city" register={register} error={errors.city?.message} required />
       <Input label="Postal code" name="postalCode" register={register} error={errors.postalCode?.message} required />
       {fields.map((item, index) => (
-        <Input
+        <ArrayFieldInput
           key={index}
           label="Mail"
-          name={`mailingList[${index}].value`}
           register={register}
-          defaultValue={item?.value}
+          name={`mailingList[${index}].value`}
           error={errors.mailingList && errors.mailingList[index]?.value?.message}
-          isMailingList
+          defaultValue={item?.value}
           handleAppend={appendField}
           handleRemove={handleRemove(index)}
-          isFirstArrayElement={index === 0}
           required={index === 0}
         />
       ))}

@@ -41,12 +41,12 @@ const EditCustomer: React.FC<Props> = ({ handleClose, id }) => {
 
   const onSubmit = async (data: Form) => {
     setLoading(true);
-    const { REGON } = data;
+    const { REGON, mailingList } = data;
     try {
       await firestore.doc(`${email}/customers/customers/${id}`).update({
         ...data,
         ...(REGON ? { REGON } : { REGON: staticFirestore.FieldValue.delete() }),
-        mailingList: fields.map(({ value }) => value)
+        mailingList: mailingList.map(({ value }) => value)
       });
       enqueueSnackbar('Customer edited', { variant: 'info' });
     } catch (error) {
