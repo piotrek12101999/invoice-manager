@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import dayjs from 'dayjs';
 import ComponentLayout from '../shared/ComponentLayout/ComponentLayout';
 import useData from '../../contexts/data/useData/useData';
 import useUI from '../../contexts/ui/useUI/useUI';
-import Invoice from './Invoice/Invoice';
+import InvoiceGroup from './InvoiceGroup/InvoiceGroup';
+import { groupInvoices } from './groupInvoices';
 
 const Invoices: React.FC = () => {
   const { toggleDrawer } = useUI();
@@ -11,14 +13,31 @@ const Invoices: React.FC = () => {
 
   const handleDrawerOpen = () => toggleDrawer('invoice');
 
+  const filterInvoices = () => {
+    if (!value) {
+      return invoices;
+    }
+
+    return invoices.filter(({ customer: { name }, number, issueDate, totalPrice }) => {
+      const shortenObject = {
+        name,
+        number,
+        date: dayjs(issueDate).format('D.M.YYYY'),
+        price: totalPrice.toString()
+      };
+
+      return Object.values(shortenObject).some((element) => element.toLowerCase().includes(value.toLowerCase()));
+    });
+  };
+
+  const groupedInvoices = groupInvoices(filterInvoices());
+
   return (
     <>
       <ComponentLayout title="Invoices" value={value} setValue={setValue} handleDrawerOpen={handleDrawerOpen} />
-      <div className="invoices-grid">
-        {invoices.map((invoice) => (
-          <Invoice key={invoice.id} data={invoice} />
-        ))}
-      </div>
+      {Object.keys(groupedInvoices).map((key) => (
+        <InvoiceGroup key={key} groupName={key} invoices={groupedInvoices[key]} />
+      ))}
     </>
   );
 };

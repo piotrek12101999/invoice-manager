@@ -6,6 +6,7 @@ import useData from '../../../../../../contexts/data/useData/useData';
 import { firestore } from '../../../../../..';
 import { useSnackbar } from 'notistack';
 import useUI from '../../../../../../contexts/ui/useUI/useUI';
+import { formatPrice } from '../../../../../../utils/formatPrice';
 
 interface Props {
   setStep: React.Dispatch<React.SetStateAction<number>>;
@@ -126,8 +127,8 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
               <div key={index}>
                 <p> Name: {product.name} </p>
                 <p> Quantity: {product.quantity} </p>
-                <p> Net price: {product.netPrice} PLN </p>
-                <p> Gross amount: {product.grossAmount} PLN </p>
+                <p> Net price: {formatPrice(parseFloat(product.netPrice))} </p>
+                <p> Gross amount: {formatPrice(parseFloat(product.grossAmount))} </p>
               </div>
             ))}
           </AccordionDetails>

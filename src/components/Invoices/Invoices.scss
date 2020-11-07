@@ -1,11 +1,19 @@
+.invoice-month {
+  font-size: 20px;
+  font-weight: 500;
+}
+
 .invoices-grid {
-  margin-top: 30px;
   display: grid;
   height: 100%;
   grid-template-columns: repeat(auto-fill, 375px);
   grid-template-rows: repeat(auto-fill, 250px);
   grid-auto-rows: 250px;
   grid-gap: 20px;
+
+  .month {
+    text-transform: capitalize;
+  }
 
   .invoice {
     padding: 20px;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dialog as MUIDialog, Button } from '@material-ui/core';
-import { firestore } from '../../..';
-import useData from '../../../contexts/data/useData/useData';
+import { firestore } from '../../../..';
+import useData from '../../../../contexts/data/useData/useData';
 import { useSnackbar } from 'notistack';
 
 interface Props {

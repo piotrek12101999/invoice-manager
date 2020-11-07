@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu as MUIMenu, MenuItem } from '@material-ui/core';
-import { storage } from '../../../';
-import useData from '../../../contexts/data/useData/useData';
+import { storage } from '../../../..';
+import useData from '../../../../contexts/data/useData/useData';
 import { useSnackbar } from 'notistack';
 
 interface Props {

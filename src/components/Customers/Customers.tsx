@@ -4,12 +4,7 @@ import GridView from './types/GridView';
 import useUI from '../../contexts/ui/useUI/useUI';
 import useData from '../../contexts/data/useData/useData';
 import ComponentLayout from '../shared/ComponentLayout/ComponentLayout';
-
-function omit(obj: Object, keys: string[]) {
-  const keysToRemove = new Set(keys.flat());
-
-  return Object.fromEntries(Object.entries(obj).filter(([k]) => !keysToRemove.has(k)));
-}
+import { omit } from '../../utils/omit';
 
 const Customers: React.FC = () => {
   const { toggleDrawer } = useUI();

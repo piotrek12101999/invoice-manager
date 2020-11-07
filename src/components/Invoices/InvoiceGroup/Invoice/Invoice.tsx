@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import { CircularProgress, IconButton } from '@material-ui/core';
-import { Invoice as InvoiceModel } from '../../../contexts/data/data.models';
-import StyledElementContainer from '../../shared/StyledElementContainer/StyledElementContainer';
+import { Invoice as InvoiceModel } from '../../../../contexts/data/data.models';
 import { MoreVertRounded, CalendarTodayRounded, PaymentRounded } from '@material-ui/icons';
 import Menu from './Menu';
 import Dialog from './Dialog';
+import { formatPrice } from '../../../../utils/formatPrice';
+import StyledElementContainer from '../../../shared/StyledElementContainer/StyledElementContainer';
 
 interface Props {
   data: InvoiceModel;
@@ -49,7 +50,7 @@ const Invoice: React.FC<Props> = ({
             <CalendarTodayRounded /> <span> Date: {dayjs(issueDate).format('D.M.YYYY')} </span>
           </div>
           <div className="element">
-            <PaymentRounded /> <span>Total price: {totalPrice} PLN </span>
+            <PaymentRounded /> <span>Total price: {formatPrice(totalPrice)} </span>
           </div>
         </div>
         {!isGeneratedPDF && (
