@@ -22,7 +22,7 @@ const Invoices: React.FC = () => {
       const shortenObject = {
         name,
         number,
-        date: dayjs(issueDate).format('D.M.YYYY'),
+        date: dayjs(issueDate).format('D MMM, YYYY'),
         price: totalPrice.toString()
       };
 

@@ -4,7 +4,6 @@ import { formatPrice } from '../../../utils/formatPrice';
 import { Props } from './component-props.model';
 
 const ListView: React.FC<Props> = ({ expenses, handleEdit }) => {
-  console.log(expenses);
   return (
     <table cellSpacing="0" className="customers-table">
       <tbody>

@@ -9,23 +9,28 @@ import { useSnackbar } from 'notistack';
 import useData from '../../../contexts/data/useData/useData';
 import { storage } from '../../..';
 
+interface LoadingState {
+  value: boolean;
+  id: string | null;
+}
+
 const GridView: React.FC<Props> = ({ expenses, handleEdit }) => {
   const {
     user: { email }
   } = useData();
-  const [isLoading, setLoading] = useState(false);
+  const [loadingData, setLoading] = useState<LoadingState>({ value: false, id: null });
   const { enqueueSnackbar } = useSnackbar();
 
   const handleInvoiceDownload = (id: string) => async (event: React.MouseEvent) => {
     event.stopPropagation();
-    setLoading(true);
+    setLoading({ value: true, id });
     try {
       const url = await storage.child(`${email}/expenses/${id}`).getDownloadURL();
       window.open(url, '_blank');
     } catch (err) {
       enqueueSnackbar('Error while downloading file', { variant: 'error' });
     } finally {
-      setLoading(false);
+      setLoading({ value: false, id: null });
     }
   };
 
@@ -40,7 +45,7 @@ const GridView: React.FC<Props> = ({ expenses, handleEdit }) => {
           <div className="details">
             {file && (
               <IconButton onClick={handleInvoiceDownload(id)}>
-                {isLoading ? <CircularProgress size={15} /> : <DescriptionRounded />}
+                {loadingData.value && id === loadingData.id ? <CircularProgress size={15} /> : <DescriptionRounded />}
               </IconButton>
             )}
             <p className="price">{formatPrice(price)}</p>

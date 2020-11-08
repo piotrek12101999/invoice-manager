@@ -20,7 +20,9 @@ const EditExpense: React.FC<Props> = ({ handleClose, id }) => {
   const [isLoading, setLoading] = useState(false);
   const { register, handleSubmit, control } = useForm<FormFields>({
     defaultValues: {
-      purchaseDate: new Date()
+      name: selectedExpense?.name,
+      price: `${selectedExpense?.price}`,
+      purchaseDate: selectedExpense?.purchaseDate
     }
   });
   const { enqueueSnackbar } = useSnackbar();
@@ -34,19 +36,19 @@ const EditExpense: React.FC<Props> = ({ handleClose, id }) => {
   const onSubmit = async ({ price, ...data }: FormFields) => {
     setLoading(true);
     try {
-      const document = await firestore.collection(`${email}/expenses/expenes`).add({
+      firestore.doc(`${email}/expenses/expenes/${id}`).update({
         ...data,
         price: parseFloat(price)
       });
 
       if (file) {
-        const path = storage.child(`${email}/expenses/${document.id}`);
+        const path = storage.child(`${email}/expenses/${id}`);
         await path.put(file);
 
-        await document.update({ file: { name: file.name, size: file.size } });
+        await firestore.doc(`${email}/expenses/expenes/${id}`).update({ file: { name: file.name, size: file.size } });
       }
 
-      enqueueSnackbar('Expense added', { variant: 'info' });
+      enqueueSnackbar('Expense updated', { variant: 'info' });
     } catch (err) {
       enqueueSnackbar('Oooops, there was a problem', { variant: 'error' });
     } finally {
@@ -63,6 +65,7 @@ const EditExpense: React.FC<Props> = ({ handleClose, id }) => {
         register={register}
         control={control}
         file={file}
+        dbFile={selectedExpense?.file}
         setFile={setFile}
         closeDrawer={closeDrawer}
         isLoading={isLoading}

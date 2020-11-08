@@ -11,17 +11,23 @@ export interface FormFields {
   purchaseDate: Date;
 }
 
+export interface DbFile {
+  name: string;
+  size: number;
+}
+
 interface Props {
   handleSubmit: () => void;
   register: any;
   control: Control<FormFields>;
-  file: File | null;
+  file?: File | null;
+  dbFile?: DbFile;
   setFile: React.Dispatch<React.SetStateAction<File | null>>;
   closeDrawer: () => void;
   isLoading: boolean;
 }
 
-const Form: React.FC<Props> = ({ handleSubmit, register, file, setFile, control, closeDrawer, isLoading }) => {
+const Form: React.FC<Props> = ({ handleSubmit, register, file, dbFile, setFile, control, closeDrawer, isLoading }) => {
   return (
     <form className="expense-form" onSubmit={handleSubmit}>
       <Input name="name" label="Name" register={register} required />
@@ -33,7 +39,7 @@ const Form: React.FC<Props> = ({ handleSubmit, register, file, setFile, control,
         name="purchaseDate"
         label="Purchase date"
       />
-      <FileUpload file={file} setFile={setFile} />
+      <FileUpload file={file} dbFile={dbFile} setFile={setFile} />
       <div className="buttons">
         <Button color="primary" type="button" onClick={closeDrawer} disabled={isLoading}>
           Cancel
