@@ -1,13 +1,8 @@
 import React from 'react';
-import { Customer } from '../../../contexts/data/data.models';
 import StyledElementContainer from '../../shared/StyledElementContainer/StyledElementContainer';
 import Avatar from '../../shared/Avatar/Avatar';
 import { PlaceRounded, DescriptionRounded } from '@material-ui/icons';
-
-interface Props {
-  customers: Customer[];
-  handleEdit: (id: string) => () => void;
-}
+import { Props } from './component-props.model';
 
 const GridView: React.FC<Props> = ({ customers, handleEdit }) => {
   return (

@@ -63,6 +63,16 @@ export interface Invoice extends FirestoreDocument {
   isGeneratedPDF: boolean;
 }
 
+export interface Expense extends FirestoreDocument {
+  name: string;
+  price: number;
+  purchaseDate: Date;
+  file?: {
+    name: string;
+    size: number;
+  };
+}
+
 export interface DataState extends InitialState {
   fetchData: (email: string) => void;
   unsubscribeData: () => void;

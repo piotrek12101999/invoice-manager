@@ -1,0 +1,50 @@
+.expenses-grid {
+  margin-top: 30px;
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-rows: repeat(auto-fill, 150px);
+  grid-auto-rows: 150px;
+  grid-gap: 20px;
+
+  .element {
+    padding: 10px;
+    border-radius: 20px;
+    transition: transform 0.15s ease-in;
+    cursor: pointer;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .info {
+      .name {
+        font-weight: 500;
+        font-size: 18px;
+        margin: unset;
+      }
+
+      .purchase-date {
+        margin: unset;
+        margin-top: 10px;
+        font-weight: 300;
+        color: #9d9d9d;
+      }
+    }
+
+    .details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .price {
+        font-weight: 500;
+        margin-right: 5px;
+      }
+    }
+
+    &:hover {
+      transform: scale(1.05, 1.05);
+    }
+  }
+}

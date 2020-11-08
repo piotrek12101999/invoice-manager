@@ -47,7 +47,7 @@ const Invoice: React.FC<Props> = ({
         </div>
         <div className="bottom-elements">
           <div className="element">
-            <CalendarTodayRounded /> <span> Date: {dayjs(issueDate).format('D.M.YYYY')} </span>
+            <CalendarTodayRounded /> <span> Date: {dayjs(issueDate).format('D MMM, YYYY')} </span>
           </div>
           <div className="element">
             <PaymentRounded /> <span>Total price: {formatPrice(totalPrice)} </span>

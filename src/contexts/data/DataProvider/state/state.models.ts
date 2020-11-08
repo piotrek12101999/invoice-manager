@@ -1,10 +1,11 @@
-import { FETCH_USER, FETCH_CUSTOMERS, FETCH_INVOICES } from './types';
-import { User, Customer, Invoice } from '../../data.models';
+import { FETCH_USER, FETCH_CUSTOMERS, FETCH_INVOICES, FETCH_EXPENSES } from './types';
+import { User, Customer, Invoice, Expense } from '../../data.models';
 
 export interface InitialState {
   user: User;
   customers: Customer[];
   invoices: Invoice[];
+  expenses: Expense[];
 }
 
 export interface FetchUserAction {
@@ -22,4 +23,9 @@ export interface FetchInvoicesAction {
   payload: Invoice[];
 }
 
-export type Actions = FetchUserAction | FetchCustomersAction | FetchInvoicesAction;
+export interface FetchExpensesAction {
+  type: typeof FETCH_EXPENSES;
+  payload: Expense[];
+}
+
+export type Actions = FetchUserAction | FetchCustomersAction | FetchInvoicesAction | FetchExpensesAction;

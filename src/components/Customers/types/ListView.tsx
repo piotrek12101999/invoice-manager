@@ -1,11 +1,6 @@
 import React from 'react';
-import { Customer } from '../../../contexts/data/data.models';
 import Avatar from '../../shared/Avatar/Avatar';
-
-interface Props {
-  customers: Customer[];
-  handleEdit: (id: string) => () => void;
-}
+import { Props } from './component-props.model';
 
 const ListView: React.FC<Props> = ({ customers, handleEdit }) => {
   return (

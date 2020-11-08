@@ -1,4 +1,4 @@
-const dateFields: string[] = ['saleDate', 'issueDate', 'paymentDeadline'];
+const dateFields: string[] = ['saleDate', 'issueDate', 'paymentDeadline', 'purchaseDate'];
 
 export function transformFirestoreData(documents: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>[]) {
   const UNIX_TIMESTAMP: number = 1000;

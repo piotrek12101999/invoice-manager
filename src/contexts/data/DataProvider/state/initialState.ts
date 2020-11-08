@@ -22,7 +22,8 @@ const user: User = {
 const initialState: InitialState = {
   user,
   invoices: [],
-  customers: []
+  customers: [],
+  expenses: []
 };
 
 export default initialState;

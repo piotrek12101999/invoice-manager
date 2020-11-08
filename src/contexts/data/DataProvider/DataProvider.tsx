@@ -4,12 +4,13 @@ import { firestore } from '../../../index';
 import DataContext from '../useData/DataContext';
 import reducer from './state/reducer';
 import initialState from './state/initialState';
-import { FETCH_INVOICES, FETCH_CUSTOMERS, FETCH_USER } from './state/types';
+import { FETCH_INVOICES, FETCH_CUSTOMERS, FETCH_USER, FETCH_EXPENSES } from './state/types';
 import { transformFirestoreData } from './transformFirestoreData';
 
 let unsubscribeUser = () => {};
 let unsubscribeCustomers = () => {};
 let unsubscribeInvoices = () => {};
+let unsubscribeExpenses = () => {};
 
 const AuthProvider: React.FC = ({ children }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -54,9 +55,23 @@ const AuthProvider: React.FC = ({ children }) => {
           );
       };
 
+      const subscribeExpenses = (email: string) => {
+        unsubscribeInvoices = firestore
+          .collection(`${email}/expenses/expenes`)
+          .orderBy('purchaseDate', 'desc')
+          .onSnapshot(
+            ({ docs }) => {
+              // @ts-ignore
+              dispatch({ type: FETCH_EXPENSES, payload: transformFirestoreData(docs) });
+            },
+            () => enqueueSnackbar('Error while fetching expenses', { variant: 'error' })
+          );
+      };
+
       subscribeUser(email);
       subscribeCustomers(email);
       subscribeInvoices(email);
+      subscribeExpenses(email);
     },
     [enqueueSnackbar]
   );
@@ -65,6 +80,7 @@ const AuthProvider: React.FC = ({ children }) => {
     unsubscribeUser();
     unsubscribeCustomers();
     unsubscribeInvoices();
+    unsubscribeExpenses();
   }, []);
 
   const value = useMemo(() => ({ ...state, fetchData, unsubscribeData }), [state, fetchData, unsubscribeData]);

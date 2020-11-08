@@ -22,7 +22,7 @@ export interface Themes {
   global: Global;
 }
 
-export type DrawerType = 'customer' | 'edit-customer' | 'invoice';
+export type DrawerType = 'customer' | 'edit-customer' | 'invoice' | 'expense' | 'edit-expense';
 
 export interface Drawer {
   open: boolean;

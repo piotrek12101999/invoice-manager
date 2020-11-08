@@ -1,3 +1,4 @@
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_CUSTOMERS = 'FETCH_CUSTOMERS';
 export const FETCH_INVOICES = 'FETCH_INVOICES';
+export const FETCH_EXPENSES = 'FETCH_EXPENSES';

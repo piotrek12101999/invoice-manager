@@ -4,6 +4,8 @@ import useUI from '../../../contexts/ui/useUI/useUI';
 import CreateCustomer from './CustomerMode/CreateCustomer/CreateCustomer';
 import EditCustomer from './CustomerMode/EditCustomer/EditCustomer';
 import CreateInvoice from './InvoiceMode/InvoiceMode';
+import CreateExpense from './ExpenseMode/CreateExpense/CreateExpense';
+import EditExpense from './ExpenseMode/EditExpense/EditExpense';
 
 const DetailsDrawer: React.FC = () => {
   const {
@@ -21,6 +23,10 @@ const DetailsDrawer: React.FC = () => {
         return <EditCustomer handleClose={handleClose} id={`${editID}`} />;
       case 'invoice':
         return <CreateInvoice />;
+      case 'expense':
+        return <CreateExpense handleClose={handleClose} />;
+      case 'edit-expense':
+        return <EditExpense handleClose={handleClose} id={`${editID}`} />;
       default:
         break;
     }
