@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { IconButton } from '@material-ui/core';
+import { MoreHorizRounded } from '@material-ui/icons';
 import { firestore, storage } from '../../../../..';
 import useData from '../../../../../contexts/data/useData/useData';
 import { useSnackbar } from 'notistack';
 import Form, { FormFields } from '../shared/Form';
+import Menu from './Menu';
+import { expensesCollection } from '../../../../../contexts/data/collections';
 
 interface Props {
   handleClose: () => void;
@@ -18,6 +22,7 @@ const EditExpense: React.FC<Props> = ({ handleClose, id }) => {
   const selectedExpense = expenses.find((expense) => expense.id === id);
   const [file, setFile] = useState<File | null>(null);
   const [isLoading, setLoading] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { register, handleSubmit, control } = useForm<FormFields>({
     defaultValues: {
       name: selectedExpense?.name,
@@ -33,10 +38,16 @@ const EditExpense: React.FC<Props> = ({ handleClose, id }) => {
     }
   };
 
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => setAnchorEl(null);
+
   const onSubmit = async ({ price, ...data }: FormFields) => {
     setLoading(true);
     try {
-      firestore.doc(`${email}/expenses/expenes/${id}`).update({
+      firestore.doc(`${expensesCollection(email)}/${id}`).update({
         ...data,
         price: parseFloat(price)
       });
@@ -45,7 +56,7 @@ const EditExpense: React.FC<Props> = ({ handleClose, id }) => {
         const path = storage.child(`${email}/expenses/${id}`);
         await path.put(file);
 
-        await firestore.doc(`${email}/expenses/expenes/${id}`).update({ file: { name: file.name, size: file.size } });
+        await firestore.doc(`${expensesCollection(email)}/${id}`).update({ file: { name: file.name, size: file.size } });
       }
 
       enqueueSnackbar('Expense updated', { variant: 'info' });
@@ -58,19 +69,34 @@ const EditExpense: React.FC<Props> = ({ handleClose, id }) => {
   };
 
   return (
-    <div className="expense">
-      <p className="title"> New expense </p>
-      <Form
-        handleSubmit={handleSubmit(onSubmit)}
-        register={register}
-        control={control}
-        file={file}
-        dbFile={selectedExpense?.file}
-        setFile={setFile}
+    <>
+      <div className="expense edit">
+        <div className="top-nav">
+          <p className="title"> Edit Customer </p>
+          <IconButton onClick={handleMenuOpen}>
+            <MoreHorizRounded />
+          </IconButton>
+        </div>
+        <Form
+          handleSubmit={handleSubmit(onSubmit)}
+          register={register}
+          control={control}
+          file={file}
+          dbFile={selectedExpense?.file}
+          setFile={setFile}
+          closeDrawer={closeDrawer}
+          isLoading={isLoading}
+        />
+      </div>
+      <Menu
+        anchorEl={anchorEl}
+        handleMenuClose={handleMenuClose}
+        disabled={!Boolean(selectedExpense?.file)}
+        id={id}
+        email={email}
         closeDrawer={closeDrawer}
-        isLoading={isLoading}
       />
-    </div>
+    </>
   );
 };
 

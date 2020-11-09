@@ -4,6 +4,7 @@ import { firestore } from '../../../../../../../..';
 import useData from '../../../../../../../../contexts/data/useData/useData';
 import Layout from './Layout';
 import { DialogVariantProps } from './dialog-variant.model';
+import { customersCollection } from '../../../../../../../../contexts/data/collections';
 
 const NewCustomer: React.FC<DialogVariantProps> = ({ setStep, data, toggleCustomerDialog, isLoading, setLoading }) => {
   const {
@@ -16,7 +17,7 @@ const NewCustomer: React.FC<DialogVariantProps> = ({ setStep, data, toggleCustom
     try {
       const { REGON, mailingList, ...customer } = data;
 
-      await firestore.collection(`${email}/customers/customers`).add({
+      await firestore.collection(customersCollection(email)).add({
         ...customer,
         ...(REGON && { REGON }),
         mailingList: mailingList.map((item) => item.value)

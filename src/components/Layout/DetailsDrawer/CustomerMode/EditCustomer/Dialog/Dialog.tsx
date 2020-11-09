@@ -3,6 +3,7 @@ import { Dialog as MUIDialog, Button } from '@material-ui/core';
 import Avatar from '../../../../../shared/Avatar/Avatar';
 import { firestore } from '../../../../../..';
 import { useSnackbar } from 'notistack';
+import { customersCollection } from '../../../../../../contexts/data/collections';
 
 interface Props {
   name: string;
@@ -20,7 +21,7 @@ const Dialog: React.FC<Props> = ({ name, id, email, isDialogOpen, toggleDialog, 
     toggleDialog();
     handleClose();
     try {
-      await firestore.doc(`${email}/customers/customers/${id}`).delete();
+      await firestore.doc(`${customersCollection(email)}/${id}`).delete();
       enqueueSnackbar('Customer deleted', { variant: 'info' });
     } catch (error) {
       enqueueSnackbar('There was a problem', { variant: 'error' });

@@ -4,6 +4,7 @@ import { firestore, storage } from '../../../../..';
 import useData from '../../../../../contexts/data/useData/useData';
 import { useSnackbar } from 'notistack';
 import Form, { FormFields } from '../shared/Form';
+import { expensesCollection } from '../../../../../contexts/data/collections';
 
 interface Props {
   handleClose: () => void;
@@ -31,7 +32,7 @@ const CreateExpense: React.FC<Props> = ({ handleClose }) => {
   const onSubmit = async ({ price, ...data }: FormFields) => {
     setLoading(true);
     try {
-      const document = await firestore.collection(`${email}/expenses/expenes`).add({
+      const document = await firestore.collection(expensesCollection(email)).add({
         ...data,
         price: parseFloat(price)
       });

@@ -3,6 +3,7 @@ import { Dialog as MUIDialog, Button } from '@material-ui/core';
 import { firestore } from '../../../..';
 import useData from '../../../../contexts/data/useData/useData';
 import { useSnackbar } from 'notistack';
+import { invoicesCollection } from '../../../../contexts/data/collections';
 
 interface Props {
   open: boolean;
@@ -20,7 +21,7 @@ const Dialog: React.FC<Props> = ({ open, toggleDialog, number, id }) => {
   const handleDelete = async () => {
     toggleDialog();
     try {
-      await firestore.doc(`${email}/invoices/invoices/${id}`).delete();
+      await firestore.doc(`${invoicesCollection(email)}/${id}`).delete();
       enqueueSnackbar('Invoice deleted', { variant: 'info' });
     } catch (error) {
       enqueueSnackbar('There was a problem', { variant: 'error' });

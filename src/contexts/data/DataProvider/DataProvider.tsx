@@ -6,6 +6,7 @@ import reducer from './state/reducer';
 import initialState from './state/initialState';
 import { FETCH_INVOICES, FETCH_CUSTOMERS, FETCH_USER, FETCH_EXPENSES } from './state/types';
 import { transformFirestoreData } from './transformFirestoreData';
+import { customersCollection, expensesCollection, invoicesCollection, userDoc } from '../collections';
 
 let unsubscribeUser = () => {};
 let unsubscribeCustomers = () => {};
@@ -19,7 +20,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const fetchData = useCallback(
     (email: string) => {
       const subscribeUser = (email: string) => {
-        unsubscribeUser = firestore.doc(`${email}/data`).onSnapshot(
+        unsubscribeUser = firestore.doc(userDoc(email)).onSnapshot(
           (snapshot) => {
             const data = snapshot.data();
             // @ts-ignore
@@ -31,7 +32,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
       const subscribeCustomers = (email: string) => {
         unsubscribeCustomers = firestore
-          .collection(`${email}/customers/customers`)
+          .collection(customersCollection(email))
           .orderBy('name', 'asc')
           .onSnapshot(
             ({ docs }) => {
@@ -44,7 +45,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
       const subscribeInvoices = (email: string) => {
         unsubscribeInvoices = firestore
-          .collection(`${email}/invoices/invoices`)
+          .collection(invoicesCollection(email))
           .orderBy('saleDate', 'desc')
           .onSnapshot(
             ({ docs }) => {
@@ -57,7 +58,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
       const subscribeExpenses = (email: string) => {
         unsubscribeInvoices = firestore
-          .collection(`${email}/expenses/expenes`)
+          .collection(expensesCollection(email))
           .orderBy('purchaseDate', 'desc')
           .onSnapshot(
             ({ docs }) => {

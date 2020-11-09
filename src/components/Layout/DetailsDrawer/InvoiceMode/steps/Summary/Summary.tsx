@@ -7,6 +7,7 @@ import { firestore } from '../../../../../..';
 import { useSnackbar } from 'notistack';
 import useUI from '../../../../../../contexts/ui/useUI/useUI';
 import { formatPrice } from '../../../../../../utils/formatPrice';
+import { invoicesCollection } from '../../../../../../contexts/data/collections';
 
 interface Props {
   setStep: React.Dispatch<React.SetStateAction<number>>;
@@ -59,7 +60,7 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
   const handleInvoiceAdd = async () => {
     setLoading(true);
     try {
-      await firestore.collection(`${email}/invoices/invoices`).add({
+      await firestore.collection(invoicesCollection(email)).add({
         ...basicData,
         totalPrice: products.reduce((sum, { grossAmount }) => sum + parseFloat(grossAmount), 0),
         customer: {

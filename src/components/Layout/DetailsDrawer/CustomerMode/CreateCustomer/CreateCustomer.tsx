@@ -7,6 +7,7 @@ import { firestore } from '../../../../..';
 import useData from '../../../../../contexts/data/useData/useData';
 import { useSnackbar } from 'notistack';
 import { Form } from '../shared/customerTypes';
+import { customersCollection } from '../../../../../contexts/data/collections';
 
 interface Props {
   handleClose: () => void;
@@ -30,7 +31,7 @@ const CreateCustomer: React.FC<Props> = ({ handleClose }) => {
 
   const onSubmit = async ({ NIP, REGON, name, city, street, postalCode, mailingList }: Form) => {
     try {
-      await firestore.collection(`${email}/customers/customers`).add({
+      await firestore.collection(customersCollection(email)).add({
         NIP,
         name,
         city,

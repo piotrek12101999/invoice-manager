@@ -19,7 +19,6 @@ const Menu: React.FC<Props> = ({ anchorEl, handleClose, toggleDialog, id }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const handleDownload = async () => {
-    handleClose();
     setLoading(true);
     try {
       const url = await storage.child(`${email}/invoices/${id}`).getDownloadURL();
@@ -28,6 +27,7 @@ const Menu: React.FC<Props> = ({ anchorEl, handleClose, toggleDialog, id }) => {
       enqueueSnackbar('There was a problem', { variant: 'error' });
     } finally {
       setLoading(false);
+      handleClose();
     }
   };
 

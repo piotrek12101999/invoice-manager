@@ -5,6 +5,7 @@ import { firestore } from '../../../../../../../..';
 import useData from '../../../../../../../../contexts/data/useData/useData';
 import Layout from './Layout';
 import { DialogVariantProps } from './dialog-variant.model';
+import { customersCollection } from '../../../../../../../../contexts/data/collections';
 
 interface Props extends DialogVariantProps {
   originalName: string;
@@ -20,7 +21,7 @@ const EditCustomer: React.FC<Props> = ({ setStep, data, originalName, toggleCust
     setLoading(true);
     try {
       const { mailingList, REGON, id, ...customer } = data;
-      await firestore.doc(`${email}/customers/customers/${id}`).update({
+      await firestore.doc(`${customersCollection(email)}/${id}`).update({
         ...customer,
         ...(REGON ? { REGON } : { REGON: staticFirestore.FieldValue.delete() }),
         mailingList: mailingList.map((item) => item.value)

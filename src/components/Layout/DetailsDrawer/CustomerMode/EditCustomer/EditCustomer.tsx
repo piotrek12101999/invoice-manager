@@ -11,6 +11,7 @@ import { firestore as staticFirestore } from 'firebase/app';
 import Avatar from '../../../../shared/Avatar/Avatar';
 import { Button } from '@material-ui/core';
 import Dialog from './Dialog/Dialog';
+import { customersCollection } from '../../../../../contexts/data/collections';
 
 interface Props {
   id: string;
@@ -43,7 +44,7 @@ const EditCustomer: React.FC<Props> = ({ handleClose, id }) => {
     setLoading(true);
     const { REGON, mailingList } = data;
     try {
-      await firestore.doc(`${email}/customers/customers/${id}`).update({
+      await firestore.doc(`${customersCollection(email)}/${id}`).update({
         ...data,
         ...(REGON ? { REGON } : { REGON: staticFirestore.FieldValue.delete() }),
         mailingList: mailingList.map(({ value }) => value)

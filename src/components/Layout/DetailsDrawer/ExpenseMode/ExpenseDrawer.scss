@@ -6,6 +6,23 @@
     margin-bottom: 70px;
   }
 
+  &.edit {
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 70px;
+
+      .title {
+        margin-bottom: unset;
+      }
+
+      button {
+        margin-right: -12px;
+      }
+    }
+  }
+
   .expense-form {
     .file-input-container {
       position: relative;
