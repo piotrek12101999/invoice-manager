@@ -7,7 +7,7 @@ interface Props {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
   title: string;
-  handleDrawerOpen: () => void;
+  handleDrawerOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   isListViewSupported?: boolean;
   isListView?: boolean;
   setListView?: (isListViewSelected: boolean) => () => void;

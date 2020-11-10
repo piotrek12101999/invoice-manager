@@ -10,7 +10,7 @@ interface Props {
   id: string;
   email: string;
   disabled: boolean;
-  closeDrawer: () => void;
+  closeDrawer?: () => void;
 }
 
 const Menu: React.FC<Props> = ({ anchorEl, handleMenuClose, id, email, disabled, closeDrawer }) => {
@@ -46,7 +46,9 @@ const Menu: React.FC<Props> = ({ anchorEl, handleMenuClose, id, email, disabled,
       enqueueSnackbar('There was a problem', { variant: 'error' });
     } finally {
       toggleDialog();
-      closeDrawer();
+      if (closeDrawer) {
+        closeDrawer();
+      }
     }
   };
 

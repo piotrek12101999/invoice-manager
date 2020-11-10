@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IconButton } from '@material-ui/core';
-import { MoreHorizRounded } from '@material-ui/icons';
+import { MoreVertRounded } from '@material-ui/icons';
 import { firestore, storage } from '../../../../..';
 import useData from '../../../../../contexts/data/useData/useData';
 import { useSnackbar } from 'notistack';
@@ -72,9 +72,9 @@ const EditExpense: React.FC<Props> = ({ handleClose, id }) => {
     <>
       <div className="expense edit">
         <div className="top-nav">
-          <p className="title"> Edit Customer </p>
+          <p className="title"> Edit expense </p>
           <IconButton onClick={handleMenuOpen}>
-            <MoreHorizRounded />
+            <MoreVertRounded />
           </IconButton>
         </div>
         <Form
