@@ -15,12 +15,12 @@ const NewCustomer: React.FC<DialogVariantProps> = ({ setStep, data, toggleCustom
   const handleAddCustomer = async () => {
     setLoading(true);
     try {
-      const { REGON, mailingList, ...customer } = data;
+      const { REGON, mail, ...customer } = data;
 
       await firestore.collection(customersCollection(email)).add({
         ...customer,
         ...(REGON && { REGON }),
-        mailingList: mailingList.map((item) => item.value)
+        ...(mail && { mail })
       });
       enqueueSnackbar('Customer added', { variant: 'info' });
     } catch (error) {

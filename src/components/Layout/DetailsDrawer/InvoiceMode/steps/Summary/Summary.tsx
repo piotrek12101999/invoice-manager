@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Dialog, Button, Chip, CircularProgress } from '@material-ui/core';
+import { Accordion, AccordionSummary, AccordionDetails, Dialog, Button, CircularProgress } from '@material-ui/core';
 import { ExpandMoreRounded } from '@material-ui/icons';
 import { useDialogFormType } from '../../useDialogForm';
 import useData from '../../../../../../contexts/data/useData/useData';
@@ -63,10 +63,7 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
       await firestore.collection(invoicesCollection(email)).add({
         ...basicData,
         totalPrice: products.reduce((sum, { grossAmount }) => sum + parseFloat(grossAmount), 0),
-        customer: {
-          ...customerData,
-          mailingList: customerData.mailingList.map(({ value }) => value)
-        },
+        customer: customerData,
         products: products.map(({ name, VATRate, grossAmount, netPrice, quantity }) => ({
           name,
           VATRate: parseFloat(VATRate),
@@ -111,12 +108,7 @@ const Summary: React.FC<Props> = ({ setStep, forms: { basicDataForm, customerFor
             <p>
               Address: {customerData.street}, {customerData.city} {customerData.postalCode}
             </p>
-            <div className="mailing-list">
-              <span className="title"> Mailing list: </span>
-              {customerData.mailingList.map((mail, index) => (
-                <Chip key={index} label={mail.value} />
-              ))}
-            </div>
+            {customerData.mail && <p> mail: {customerData.mail} </p>}
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={expanded === 'products'} onChange={handleChange('products')}>

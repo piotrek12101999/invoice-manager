@@ -10,9 +10,8 @@ export default yup.object().shape({
   street: yup.string().max(100).required(),
   city: yup.string().max(50).required(),
   postalCode: yup.string().length(6).required(),
-  mailingList: yup.array().of(
-    yup.object().shape({
-      value: yup.string().email('must be a valid email').required()
-    })
-  )
+  mail: yup
+    .string()
+    .transform((value) => (value === '' ? undefined : value))
+    .email('must be a valid email')
 });

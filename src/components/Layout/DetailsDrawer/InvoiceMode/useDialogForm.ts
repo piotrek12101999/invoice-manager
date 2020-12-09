@@ -66,9 +66,6 @@ const useDialogForm = (): useDialogFormType => {
   });
   const customerForm = useForm<CustomerForm>({
     resolver: yupResolver(customerValidationSchema),
-    defaultValues: {
-      mailingList: [{ value: '' }]
-    },
     shouldUnregister: false
   });
   const productsForm = useForm<ProductsForm>({

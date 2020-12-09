@@ -10,9 +10,6 @@ import { ArrowRightAltRounded } from '@material-ui/icons';
 interface Props {
   handleBackStep: () => void;
   customers: Customer[];
-  fields: any[];
-  remove: (index?: number | number[] | undefined) => void;
-  append: (value: Partial<Record<string, any>> | Partial<Record<string, any>>[], shouldFocus?: boolean | undefined) => void;
   reset: (values: any) => void;
   handleNextStep: () => void;
   control: Control<CustomerForm>;
@@ -21,27 +18,11 @@ interface Props {
   setSelectedCustomer: React.Dispatch<React.SetStateAction<Customer | null>>;
 }
 
-const Form: React.FC<Props> = ({
-  customers,
-  remove,
-  append,
-  control,
-  register,
-  setSelectedCustomer,
-  handleNextStep,
-  reset,
-  fields,
-  errors,
-  handleBackStep
-}) => {
-  const handleRemove = (index: number) => () => remove(index);
-
-  const handleAppend = () => append({ value: '' });
-
+const Form: React.FC<Props> = ({ customers, control, register, setSelectedCustomer, handleNextStep, reset, errors, handleBackStep }) => {
   const handleOptionSelect = (_: any, option: Customer | string | null) => {
     if (option && typeof option === 'object') {
       setSelectedCustomer(option);
-      reset({ ...option, mailingList: option.mailingList.map((mail: string) => ({ value: mail })) });
+      reset(option);
     } else {
       setSelectedCustomer(null);
       reset({
@@ -51,7 +32,7 @@ const Form: React.FC<Props> = ({
         street: '',
         postalCode: '',
         city: '',
-        mailingList: [{ value: '' }]
+        mail: ''
       });
     }
   };
@@ -62,15 +43,6 @@ const Form: React.FC<Props> = ({
     }
 
     return '';
-  };
-
-  const handleFirstMailInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const arrayWithoutFirstField = fields.filter((_, index) => index !== 0);
-
-    reset({
-      ...control.getValues(),
-      mailingList: [{ value: event.currentTarget.value }, ...arrayWithoutFirstField.map(({ value }) => ({ value }))]
-    });
   };
 
   return (
@@ -97,38 +69,7 @@ const Form: React.FC<Props> = ({
       <Input control={control} isController error={errors.street?.message} name="street" label="Street" required />
       <Input control={control} isController error={errors.postalCode?.message} name="postalCode" label="Postal Code" required />
       <Input control={control} isController error={errors.city?.message} name="city" label="City" required />
-      {fields.map((item, index) =>
-        index === 0 ? (
-          <Input
-            key={index}
-            name="mailingList[0].value"
-            value={item?.value}
-            onChange={handleFirstMailInputChange}
-            register={register}
-            type="mail"
-            label="Mail"
-            isFirstArrayElement
-            handleAppend={handleAppend}
-            isMailingList
-            error={errors.mailingList && errors.mailingList[0]?.value?.message}
-            required
-          />
-        ) : (
-          <Input
-            key={index}
-            control={control}
-            isController
-            name={`mailingList[${index}].value`}
-            label="Mail"
-            type="mail"
-            isMailingList
-            defaultValue={item?.value}
-            handleAppend={handleAppend}
-            error={errors.mailingList && errors.mailingList[index]?.value?.message}
-            handleRemove={handleRemove(index)}
-          />
-        )
-      )}
+      <Input control={control} isController error={errors.mail?.message} name="mail" type="mail" label="Email" />
       <div className="buttons">
         <Button color="primary" type="button" onClick={handleBackStep}>
           Back

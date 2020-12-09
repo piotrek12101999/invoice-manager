@@ -20,11 +20,11 @@ const EditCustomer: React.FC<Props> = ({ setStep, data, originalName, toggleCust
   const handleEditCustomer = async () => {
     setLoading(true);
     try {
-      const { mailingList, REGON, id, ...customer } = data;
+      const { mail, REGON, id, ...customer } = data;
       await firestore.doc(`${customersCollection(email)}/${id}`).update({
         ...customer,
         ...(REGON ? { REGON } : { REGON: staticFirestore.FieldValue.delete() }),
-        mailingList: mailingList.map((item) => item.value)
+        ...(mail ? { mail } : { REGON: staticFirestore.FieldValue.delete() })
       });
       enqueueSnackbar('Customer edited', { variant: 'info' });
     } catch (error) {

@@ -28,7 +28,7 @@ interface CustomerCoreData {
   street: string;
   city: string;
   postalCode: string;
-  mailingList: string[];
+  mail?: string;
 }
 
 export interface Customer extends FirestoreDocument, CustomerCoreData {}

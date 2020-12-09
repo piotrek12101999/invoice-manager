@@ -1,26 +1,18 @@
 import React from 'react';
 import { Button, CircularProgress } from '@material-ui/core';
-import { DeepMap, FieldError, ArrayField } from 'react-hook-form';
+import { DeepMap, FieldError } from 'react-hook-form';
 import Input from '../../../../shared/Input/Input';
 import { Form } from './customerTypes';
-import ArrayFieldInput from './ArrayFieldInput';
 
 interface Props {
   handleSubmit: () => void;
   register: any;
   onCancel: () => void;
   errors: DeepMap<Form, FieldError>;
-  fields: Partial<ArrayField<Record<string, any>, 'id'>>[];
-  append: (value: Partial<Record<string, any>> | Partial<Record<string, any>>[], shouldFocus?: boolean | undefined) => void;
-  remove: (index?: number | number[] | undefined) => void;
   isLoading?: boolean;
 }
 
-const CustomerForm: React.FC<Props> = ({ handleSubmit, register, onCancel, errors, fields, remove, append, isLoading }) => {
-  const appendField = () => append({ value: '' });
-
-  const handleRemove = (index: number) => () => remove(index);
-
+const CustomerForm: React.FC<Props> = ({ handleSubmit, register, onCancel, errors, isLoading }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Input label="NIP" name="NIP" register={register} error={errors.NIP?.message} required />
@@ -29,19 +21,7 @@ const CustomerForm: React.FC<Props> = ({ handleSubmit, register, onCancel, error
       <Input label="Street" name="street" register={register} error={errors.street?.message} required />
       <Input label="City" name="city" register={register} error={errors.city?.message} required />
       <Input label="Postal code" name="postalCode" register={register} error={errors.postalCode?.message} required />
-      {fields.map((item, index) => (
-        <ArrayFieldInput
-          key={index}
-          label="Mail"
-          register={register}
-          name={`mailingList[${index}].value`}
-          error={errors.mailingList && errors.mailingList[index]?.value?.message}
-          defaultValue={item?.value}
-          handleAppend={appendField}
-          handleRemove={handleRemove(index)}
-          required={index === 0}
-        />
-      ))}
+      <Input label="Email" name="mail" type="mail" register={register} error={errors.mail?.message} />
       <div className="buttons">
         <Button className="button-customer" color="primary" onClick={onCancel} disabled={isLoading}>
           Cancel

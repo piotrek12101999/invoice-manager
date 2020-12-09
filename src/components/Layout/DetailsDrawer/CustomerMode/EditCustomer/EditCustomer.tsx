@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useData from '../../../../../contexts/data/useData/useData';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import validationSchema from '../../../../shared/customerValidationSchema/customerValidationSchema';
 import { Form } from '../shared/customerTypes';
@@ -27,27 +27,22 @@ const EditCustomer: React.FC<Props> = ({ handleClose, id }) => {
     user: { email }
   } = useData();
   const selectedCustomer = customers.find((customer) => customer.id === id);
-  const { register, handleSubmit, errors, control } = useForm<Form>({
+  const { register, handleSubmit, errors } = useForm<Form>({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      ...selectedCustomer,
-      mailingList: selectedCustomer?.mailingList.map((mail) => ({ value: mail }))
+      ...selectedCustomer
     }
   });
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'mailingList'
-  });
+
   const toggleDialog = () => setDialogOpen((prevValue) => !prevValue);
 
-  const onSubmit = async (data: Form) => {
+  const onSubmit = async ({ REGON, mail, ...data }: Form) => {
     setLoading(true);
-    const { REGON, mailingList } = data;
     try {
       await firestore.doc(`${customersCollection(email)}/${id}`).update({
         ...data,
         ...(REGON ? { REGON } : { REGON: staticFirestore.FieldValue.delete() }),
-        mailingList: mailingList.map(({ value }) => value)
+        ...(mail ? { mail } : { mail: staticFirestore.FieldValue.delete() })
       });
       enqueueSnackbar('Customer edited', { variant: 'info' });
     } catch (error) {
@@ -73,9 +68,6 @@ const EditCustomer: React.FC<Props> = ({ handleClose, id }) => {
           onCancel={handleClose}
           register={register}
           errors={errors}
-          fields={fields}
-          append={append}
-          remove={remove}
           isLoading={isLoading}
         />
       </div>

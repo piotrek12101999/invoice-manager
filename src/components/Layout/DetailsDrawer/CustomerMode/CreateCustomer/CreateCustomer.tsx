@@ -1,6 +1,6 @@
 import React from 'react';
 import CustomerForm from '../shared/CustomerForm';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import validationSchema from '../../../../shared/customerValidationSchema/customerValidationSchema';
 import { firestore } from '../../../../..';
@@ -18,27 +18,16 @@ const CreateCustomer: React.FC<Props> = ({ handleClose }) => {
   const {
     user: { email }
   } = useData();
-  const { register, handleSubmit, errors, control } = useForm<Form>({
-    resolver: yupResolver(validationSchema),
-    defaultValues: {
-      mailingList: [{ value: '' }]
-    }
-  });
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'mailingList'
+  const { register, handleSubmit, errors } = useForm<Form>({
+    resolver: yupResolver(validationSchema)
   });
 
-  const onSubmit = async ({ NIP, REGON, name, city, street, postalCode, mailingList }: Form) => {
+  const onSubmit = async ({ mail, REGON, ...customer }: Form) => {
     try {
       await firestore.collection(customersCollection(email)).add({
-        NIP,
-        name,
-        city,
-        street,
-        postalCode,
+        ...customer,
         ...(REGON && { REGON }),
-        mailingList: mailingList.map((item) => item.value)
+        ...(mail && { mail })
       });
       enqueueSnackbar('Customer added', { variant: 'info' });
     } catch (error) {
@@ -52,15 +41,7 @@ const CreateCustomer: React.FC<Props> = ({ handleClose }) => {
   return (
     <div className="customer new">
       <p className="title"> New Customer </p>
-      <CustomerForm
-        handleSubmit={handleSubmit(onSubmit)}
-        onCancel={handleClose}
-        register={register}
-        errors={errors}
-        fields={fields}
-        append={append}
-        remove={remove}
-      />
+      <CustomerForm handleSubmit={handleSubmit(onSubmit)} onCancel={handleClose} register={register} errors={errors} />
     </div>
   );
 };
