@@ -1,0 +1,29 @@
+.settings-modules {
+  display: flex;
+  justify-content: space-between;
+
+  .user-settings {
+    padding: 15px;
+    border-radius: 20px;
+
+    .title {
+      margin: unset;
+      margin-bottom: 25px;
+      font-size: 20px;
+      font-weight: 300;
+    }
+  }
+}
+
+.user-settings-drawer {
+  padding: 20px !important;
+  display: flex;
+  justify-content: center;
+
+  button {
+    width: 194px;
+    height: 40px;
+    margin-right: 15px;
+    text-transform: unset;
+  }
+}

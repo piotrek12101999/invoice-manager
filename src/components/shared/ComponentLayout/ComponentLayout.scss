@@ -9,6 +9,11 @@
     margin: 0;
     font-size: 26px;
     font-weight: 500;
+
+    &.settings {
+      margin-top: 5px;
+      margin-bottom: 20px;
+    }
   }
 
   .actions {

@@ -9,6 +9,7 @@ import Customers from '../Customers/Customers';
 import Invoices from '../Invoices/Invoices';
 import Expenses from '../Expenses/Expenses';
 import History from '../History/History';
+import Settings from '../Settings/Settings';
 
 const Layout: React.FC = () => {
   const {
@@ -26,6 +27,7 @@ const Layout: React.FC = () => {
           <Route path="/invoices" component={Invoices} />
           <Route path="/expenses" component={Expenses} />
           <Route path="/history" component={History} />
+          <Route path="/settings" component={Settings} />
         </Switch>
       </div>
       <DetailsDrawer />
