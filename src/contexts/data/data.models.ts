@@ -4,12 +4,11 @@ interface FirestoreDocument {
   id: string;
 }
 
-export interface User extends FirestoreDocument {
+export interface User {
   NIP: string;
   PKD: string[];
   REGON: string;
   account: string;
-  balance: number;
   companyName: string;
   email: string;
   name: string;
@@ -19,6 +18,17 @@ export interface User extends FirestoreDocument {
   street: string;
   city: string;
   postalCode: string;
+}
+export interface Settings {
+  mailing: {
+    enabled: boolean;
+    list: string[];
+  };
+  notifications: {
+    enabled: boolean;
+    expenses: boolean;
+    invoices: boolean;
+  };
 }
 
 interface CustomerCoreData {

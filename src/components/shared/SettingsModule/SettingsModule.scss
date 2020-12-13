@@ -1,0 +1,33 @@
+.expansion-panel {
+  width: 100%;
+  border-radius: 20px !important;
+  margin-bottom: 30px !important;
+
+  .summary {
+    height: 78px;
+
+    .heading {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+
+      .title {
+        font-weight: 300;
+        text-transform: uppercase;
+        font-size: 14px;
+        letter-spacing: 1.21px;
+      }
+    }
+  }
+
+  .details {
+    display: unset !important;
+
+    .details-content {
+      padding-left: 16px;
+      padding-right: 16px;
+      margin-bottom: 16px;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import React from 'react';
-import MailingModule from './modules/MailingModule/MailingModule';
 import UserDataModule from './modules/UserDataModule/UserDataModule';
+import MailingNotifications from './modules/MailingNotifications/MailingNotifications';
+import MailingSettings from './modules/MailingSettings/MailingSettings';
 
 const Settings: React.FC = () => {
   return (
@@ -8,9 +9,12 @@ const Settings: React.FC = () => {
       <div className="component-layout">
         <p className="title settings"> Settings </p>
       </div>
-      <div className="settings-modules">
+      <div className="settings-panel">
         <UserDataModule />
-        <MailingModule />
+        <div className="modules">
+          <MailingNotifications />
+          <MailingSettings />
+        </div>
       </div>
     </>
   );

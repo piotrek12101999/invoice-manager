@@ -1,13 +1,11 @@
-import { User } from '../../data.models';
+import { Settings, User } from '../../data.models';
 import { InitialState } from './state.models';
 
 const user: User = {
-  id: '',
   NIP: '',
   PKD: [],
   REGON: '',
   account: '',
-  balance: 0,
   companyName: '',
   email: '',
   name: '',
@@ -19,8 +17,21 @@ const user: User = {
   city: ''
 };
 
+const settings: Settings = {
+  mailing: {
+    enabled: false,
+    list: []
+  },
+  notifications: {
+    enabled: false,
+    expenses: false,
+    invoices: false
+  }
+};
+
 const initialState: InitialState = {
   user,
+  settings,
   invoices: [],
   customers: [],
   expenses: []

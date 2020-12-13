@@ -57,6 +57,23 @@ export const createMaterialTheme = (theme: ThemeType): MUITheme =>
         root: {
           borderRadius: 12
         }
+      },
+      MuiAccordion: {
+        root: {
+          '&$expanded': {
+            margin: 'unset'
+          },
+          '&::before': {
+            background: 'transparent'
+          },
+          background: theme === 'dark' ? '#252526' : '#ffffff',
+          boxShadow: 'unset'
+        }
+      },
+      MuiAccordionDetails: {
+        root: {
+          padding: 'unset'
+        }
       }
     }
   });

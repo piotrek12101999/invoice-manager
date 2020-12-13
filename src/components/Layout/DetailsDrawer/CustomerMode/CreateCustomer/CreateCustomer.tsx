@@ -31,7 +31,6 @@ const CreateCustomer: React.FC<Props> = ({ handleClose }) => {
       });
       enqueueSnackbar('Customer added', { variant: 'info' });
     } catch (error) {
-      console.log(error);
       enqueueSnackbar('Error while adding customer', { variant: 'error' });
     } finally {
       handleClose();

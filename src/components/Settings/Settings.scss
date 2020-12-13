@@ -1,16 +1,43 @@
-.settings-modules {
+.settings-panel {
   display: flex;
   justify-content: space-between;
 
-  .user-settings {
-    padding: 15px;
+  .user-module {
     border-radius: 20px;
+    padding: 15px;
+    margin-right: 20px;
+    height: 512px;
 
     .title {
       margin: unset;
       margin-bottom: 25px;
-      font-size: 20px;
       font-weight: 300;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1.21px;
+    }
+  }
+
+  .modules {
+    width: 100%;
+
+    .email-notifications {
+      .email-notification {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+
+    .email-settings {
+      form {
+        display: flex;
+        flex-direction: row;
+      }
+      button {
+        height: 36px;
+        margin-left: 30px;
+      }
     }
   }
 }
