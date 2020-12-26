@@ -5,7 +5,7 @@ import { settingsDoc } from '../contexts/data/collections';
 import { Settings } from '../contexts/data/data.models';
 import useData from '../contexts/data/useData/useData';
 
-type SettingsModules = 'mailing' | 'notifications';
+type SettingsModules = 'list' | 'notifications';
 
 interface UsePanelExpandedDetails {
   expanded: boolean;

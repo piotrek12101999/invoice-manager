@@ -18,13 +18,17 @@ const user: User = {
 };
 
 const settings: Settings = {
-  mailing: {
+  list: {
     enabled: false,
     list: []
   },
   notifications: {
     enabled: false,
-    expenses: false,
+    expenses: {
+      enabled: false,
+      type: 'last',
+      date: '1'
+    },
     invoices: false
   }
 };

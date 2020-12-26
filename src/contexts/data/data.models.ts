@@ -19,14 +19,23 @@ export interface User {
   city: string;
   postalCode: string;
 }
+
+export type ExpensesNotificationsTypes = 'first' | 'last' | 'custom';
+
+export interface ExpensesNotifications {
+  enabled: boolean;
+  type: ExpensesNotificationsTypes;
+  date: string;
+}
+
 export interface Settings {
-  mailing: {
+  list: {
     enabled: boolean;
     list: string[];
   };
   notifications: {
     enabled: boolean;
-    expenses: boolean;
+    expenses: ExpensesNotifications;
     invoices: boolean;
   };
 }

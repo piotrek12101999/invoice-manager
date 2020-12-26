@@ -1,7 +1,7 @@
 import React from 'react';
 import UserDataModule from './modules/UserDataModule/UserDataModule';
 import MailingNotifications from './modules/MailingNotifications/MailingNotifications';
-import MailingSettings from './modules/MailingSettings/MailingSettings';
+import MailingList from './modules/MailingList/MailingList';
 
 const Settings: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const Settings: React.FC = () => {
         <UserDataModule />
         <div className="modules">
           <MailingNotifications />
-          <MailingSettings />
+          <MailingList />
         </div>
       </div>
     </>

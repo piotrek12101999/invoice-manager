@@ -7,15 +7,8 @@ import * as yup from 'yup';
 import usePanelExpanded from '../../../../hooks/usePanelExpanded';
 import Input from '../../../shared/Input/Input';
 import SettingsModule from '../../../shared/SettingsModule/SettingsModule';
-import styled from 'styled-components';
+import StyledLine from '../../../shared/StyledLine/StyledLine';
 import { yupResolver } from '@hookform/resolvers';
-
-const StyledLine = styled.div`
-  height: 2px;
-  width: 100%;
-  margin-bottom: 30px;
-  background-color: ${(props) => props.theme.canvasColor};
-`;
 
 const validationSchema = yup.object().shape({
   mail: yup.string().email().required()
@@ -25,17 +18,17 @@ interface Form {
   mail: string;
 }
 
-const MailingSettings: React.FC = () => {
+const MailingList: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const { register, errors, handleSubmit, reset } = useForm<Form>({
+  const { control, errors, handleSubmit, reset } = useForm<Form>({
     resolver: yupResolver(validationSchema)
   });
-  const { expanded, togglePanel, document, settings } = usePanelExpanded('mailing');
+  const { expanded, togglePanel, document, settings } = usePanelExpanded('list');
 
   const handleAdd = async ({ mail }: Form) => {
     try {
       await document.update({
-        'mailing.list': firebase.firestore.FieldValue.arrayUnion(mail)
+        'list.list': firebase.firestore.FieldValue.arrayUnion(mail)
       });
       reset();
     } catch {
@@ -46,7 +39,7 @@ const MailingSettings: React.FC = () => {
   const handleDelete = (mail: string) => async () => {
     try {
       await document.update({
-        'mailing.list': firebase.firestore.FieldValue.arrayRemove(mail)
+        'list.list': firebase.firestore.FieldValue.arrayRemove(mail)
       });
       enqueueSnackbar('Email removed', { variant: 'info' });
     } catch {
@@ -55,22 +48,22 @@ const MailingSettings: React.FC = () => {
   };
 
   return (
-    <SettingsModule title="E-mail settings" summaryClassName="email-settings" expanded={expanded} togglePanel={togglePanel}>
+    <SettingsModule title="Mailing list" summaryClassName="email-list" expanded={expanded} togglePanel={togglePanel}>
       <p className="descriptipn">Add mails to which notifications email should be sent</p>
       <form onSubmit={handleSubmit(handleAdd)}>
-        <Input name="mail" label="Email" error={errors.mail?.message} register={register} />
+        <Input control={control} isController error={errors.mail?.message} name="mail" label="Email" required />
         <Button color="primary" variant="contained" type="submit" disabled={Object.keys(errors).length > 0}>
           Add
         </Button>
       </form>
       <StyledLine />
-      {settings.mailing.list.length === 0 ? (
+      {settings.list.list.length === 0 ? (
         <p className="list-empty"> Mailing list is empty. </p>
       ) : (
-        settings.mailing.list.map((mail, index) => (
+        settings.list.list.map((mail, index) => (
           <div key={index}>
-            <Input name="email" label="Email" value={mail} />
-            <Button color="primary" variant="contained" onClick={handleDelete(mail)}>
+            <Input name="email" label="Email" value={mail} disabled />
+            <Button className="delete" variant="outlined" onClick={handleDelete(mail)}>
               Delete
             </Button>
           </div>
@@ -80,4 +73,4 @@ const MailingSettings: React.FC = () => {
   );
 };
 
-export default MailingSettings;
+export default MailingList;

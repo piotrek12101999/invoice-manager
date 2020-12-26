@@ -22,14 +22,48 @@
     width: 100%;
 
     .email-notifications {
+      .expenses-panel {
+        .summary {
+          padding: unset;
+
+          .summary-details {
+            width: 100%;
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+          }
+        }
+
+        .details {
+          .custom-days-details {
+            display: flex;
+            align-items: center;
+
+            .before-input {
+              margin-right: 10px;
+            }
+
+            .after-input {
+              margin-left: 10px;
+            }
+          }
+
+          .line {
+            margin-top: 10px;
+            margin-bottom: 10px;
+          }
+        }
+      }
+
       .email-notification {
         display: flex;
         width: 100%;
+        align-items: center;
         justify-content: space-between;
       }
     }
 
-    .email-settings {
+    .email-list {
       form {
         display: flex;
         flex-direction: row;
@@ -37,6 +71,23 @@
       button {
         height: 36px;
         margin-left: 30px;
+        margin-top: 3px;
+
+        &.delete {
+          border-color: $error;
+        }
+      }
+    }
+
+    .email-dates {
+      .email-date {
+        display: flex;
+        width: 100%;
+        align-items: center;
+
+        p {
+          margin-right: 50px;
+        }
       }
     }
   }
